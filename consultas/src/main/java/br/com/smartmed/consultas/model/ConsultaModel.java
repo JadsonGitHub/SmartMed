@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "consulta")
-public class ConsultaModel
+public class  ConsultaModel
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

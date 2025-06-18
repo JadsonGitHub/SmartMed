@@ -2,12 +2,15 @@ package br.com.smartmed.consultas.service;
 
 import br.com.smartmed.consultas.exception.*;
 import br.com.smartmed.consultas.model.ConsultaModel;
+import br.com.smartmed.consultas.model.ConsultaModel;
 import br.com.smartmed.consultas.repository.ConsultaRepository;
+import br.com.smartmed.consultas.rest.dto.ConsultaDTO;
 import br.com.smartmed.consultas.rest.dto.ConsultaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +26,7 @@ public class ConsultaService
      */
     @Autowired
     private ConsultaRepository consultaRepository;
+
     /**
      * Obtém um consulta pelo ID.
      *
@@ -36,6 +40,7 @@ public class ConsultaService
         ConsultaModel consulta = consultaRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Consulta com ID " + id + " não encontrado."));
         return consulta.toDTO();
     }
+
     /**
      * Obtém a lista de todos os consultas cadastrados.
      *
@@ -49,6 +54,91 @@ public class ConsultaService
                 .map(consulta -> consulta.toDTO())
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Obtém a lista de todos os consultas cadastrados com um DataHoraConsulta.
+     *
+     * @return Lista de ConsultaDTO representando os consultas cadastrados com o DataHoraConsulta.
+     */
+    @Transactional(readOnly = true)
+    public List<ConsultaDTO> obterPorDataHoraConsulta(LocalDate DataHoraConsulta)
+    {
+        List<ConsultaModel> consultas = consultaRepository.findByDataHoraConsulta(DataHoraConsulta);
+        return consultas.stream()
+                .map(consulta -> consulta.toDTO())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Obtém a lista de todos os consultas cadastrados com um PacienteID.
+     *
+     * @return Lista de ConsultaDTO representando os consultas cadastrados com o PacienteID.
+     */
+    @Transactional(readOnly = true)
+    public List<ConsultaDTO> obterPorPacienteID(int PacienteID)
+    {
+        List<ConsultaModel> consultas = consultaRepository.findByPacienteID(PacienteID);
+        return consultas.stream()
+                .map(consulta -> consulta.toDTO())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Obtém a lista de todos os consultas cadastrados com um MedicoID.
+     *
+     * @return Lista de ConsultaDTO representando os consultas cadastrados com o MedicoID.
+     */
+    @Transactional(readOnly = true)
+    public List<ConsultaDTO> obterPorMedicoID(int MedicoID)
+    {
+        List<ConsultaModel> consultas = consultaRepository.findByMedicoID(MedicoID);
+        return consultas.stream()
+                .map(consulta -> consulta.toDTO())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Obtém a lista de todos os consultas cadastrados com um ConvenioID.
+     *
+     * @return Lista de ConsultaDTO representando os consultas cadastrados com o ConvenioID.
+     */
+    @Transactional(readOnly = true)
+    public List<ConsultaDTO> obterPorConvenioID(int ConvenioID)
+    {
+        List<ConsultaModel> consultas = consultaRepository.findByConvenioID(ConvenioID);
+        return consultas.stream()
+                .map(consulta -> consulta.toDTO())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Obtém a lista de todos os consultas cadastrados com um Status.
+     *
+     * @return Lista de ConsultaDTO representando os consultas cadastrados com o Status.
+     */
+    @Transactional(readOnly = true)
+    public List<ConsultaDTO> obterPorStatus(String Status)
+    {
+        List<ConsultaModel> consultas = consultaRepository.findByStatus(Status);
+        return consultas.stream()
+                .map(consulta -> consulta.toDTO())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Obtém a lista de todos os consultas cadastrados com um RecepcionistaID.
+     *
+     * @return Lista de ConsultaDTO representando os consultas cadastrados com o RecepcionistaID.
+     */
+    @Transactional(readOnly = true)
+    public List<ConsultaDTO> obterPorRecepcionistaID(int RecepcionistaID)
+    {
+        List<ConsultaModel> consultas = consultaRepository.findByRecepcionistaID(RecepcionistaID);
+        return consultas.stream()
+                .map(consulta -> consulta.toDTO())
+                .collect(Collectors.toList());
+    }
+
     /**
      * Salva um novo consulta na base de dados.
      *
@@ -93,6 +183,7 @@ public class ConsultaService
             throw new SQLException("Erro! Não foi possível salvar o consulta " + novoConsulta.getStatus() + ". Falha na conexão com o banco de dados!");
         }
     }
+
     /**
      * Atualiza os dados de um consulta existente.
      *
@@ -142,6 +233,7 @@ public class ConsultaService
             throw new ObjectNotFoundException("Erro! Não foi possível atualizar o consulta" + consultaExistente.getStatus() + ". Não encontrado no banco de dados!");
         }
     }
+    
     /**
      * Deleta um consulta da base de dados.
      *

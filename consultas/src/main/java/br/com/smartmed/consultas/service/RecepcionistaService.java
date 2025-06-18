@@ -2,7 +2,9 @@ package br.com.smartmed.consultas.service;
 
 import br.com.smartmed.consultas.exception.*;
 import br.com.smartmed.consultas.model.RecepcionistaModel;
+import br.com.smartmed.consultas.model.RecepcionistaModel;
 import br.com.smartmed.consultas.repository.RecepcionistaRepository;
+import br.com.smartmed.consultas.rest.dto.RecepcionistaDTO;
 import br.com.smartmed.consultas.rest.dto.RecepcionistaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ public class RecepcionistaService
      */
     @Autowired
     private RecepcionistaRepository recepcionistaRepository;
+    
     /**
      * Obtém um recepcionista pelo ID.
      *
@@ -36,6 +39,7 @@ public class RecepcionistaService
         RecepcionistaModel recepcionista = recepcionistaRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Recepcionista com ID " + id + " não encontrado."));
         return recepcionista.toDTO();
     }
+    
     /**
      * Obtém a lista de todos os recepcionistas cadastrados.
      *
@@ -49,6 +53,35 @@ public class RecepcionistaService
                 .map(recepcionista -> recepcionista.toDTO())
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Obtém a lista de todos os recepcionistas cadastrados com um nome.
+     *
+     * @return Lista de RecepcionistaDTO representando os recepcionistas cadastrados com o nome.
+     */
+    @Transactional(readOnly = true)
+    public List<RecepcionistaDTO> obterPorNome(String nome)
+    {
+        List<RecepcionistaModel> recepcionistas = recepcionistaRepository.findByNome(nome);
+        return recepcionistas.stream()
+                .map(recepcionista -> recepcionista.toDTO())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Obtém um recepcionista pelo CPF.
+     *
+     * @param cpf CPF do recepcionista.
+     * @return recepcionistaDTO representando o recepcionista encontrado.
+     * @throws ObjectNotFoundException Se o recepcionista não for encontrado.
+     */
+    @Transactional(readOnly = true)
+    public RecepcionistaDTO obterPorCpf(String cpf)
+    {
+        RecepcionistaModel recepcionista = recepcionistaRepository.findByCpf(cpf).orElseThrow(() -> new ObjectNotFoundException("Recepcionista com ID " + cpf + " não encontrado."));
+        return recepcionista.toDTO();
+    }
+    
     /**
      * Salva um novo recepcionista na base de dados.
      *

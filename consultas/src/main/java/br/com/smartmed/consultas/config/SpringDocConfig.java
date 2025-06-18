@@ -28,8 +28,8 @@ public class SpringDocConfig
                 .externalDocs(new ExternalDocumentation()
                         .description("Documentação")
                         .url("https://www.smartmed.com.br/consultas/docs/open-api"));
-    } /*
-        // COM adição de Segurança - JWT
+    }
+/*        // COM adição de Segurança - JWT
         final String securitySchemeName = "bearerAuth";
 
         return new OpenAPI()
@@ -52,5 +52,5 @@ public class SpringDocConfig
                 .externalDocs(new ExternalDocumentation()
                         .description("Documentação")
                         .url("https://www.smartmed.com.br/consultas/docs/open-api"));
-    } */
+    }   */
 }

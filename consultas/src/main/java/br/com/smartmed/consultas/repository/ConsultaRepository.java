@@ -17,6 +17,11 @@ public interface ConsultaRepository extends JpaRepository<ConsultaModel, Integer
     List<ConsultaModel> findByMedicoID(int pMedicoID);
 
     List<ConsultaModel> findByConvenioID(int pConvenioID);
+
+    List<ConsultaModel> findByRecepcionistaID(int pRecepcionistaID);
+
+    List<ConsultaModel> findByStatus(String pStatus);
+
     /**
      * Verifica se existe um cliente cadastrado com a dataHoraConsulta especificado.
      *

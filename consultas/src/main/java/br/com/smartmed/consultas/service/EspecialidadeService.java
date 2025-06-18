@@ -2,7 +2,9 @@ package br.com.smartmed.consultas.service;
 
 import br.com.smartmed.consultas.exception.*;
 import br.com.smartmed.consultas.model.EspecialidadeModel;
+import br.com.smartmed.consultas.model.EspecialidadeModel;
 import br.com.smartmed.consultas.repository.EspecialidadeRepository;
+import br.com.smartmed.consultas.rest.dto.EspecialidadeDTO;
 import br.com.smartmed.consultas.rest.dto.EspecialidadeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ public class EspecialidadeService
      */
     @Autowired
     private EspecialidadeRepository especialidadeRepository;
+    
     /**
      * Obtém um especialidade pelo ID.
      *
@@ -36,6 +39,7 @@ public class EspecialidadeService
         EspecialidadeModel especialidade = especialidadeRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Especialidade com ID " + id + " não encontrado."));
         return especialidade.toDTO();
     }
+    
     /**
      * Obtém a lista de todos os especialidades cadastrados.
      *
@@ -49,6 +53,18 @@ public class EspecialidadeService
                 .map(especialidade -> especialidade.toDTO())
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Verifica a existencia de um especialidade pelo CPF.
+     *
+     * @return Se o especialidade existe.
+     */
+    @Transactional(readOnly = true)
+    public boolean existeNome(String cpf)
+    {
+        return especialidadeRepository.existsByNome(cpf);
+    }
+    
     /**
      * Salva um novo especialidade na base de dados.
      *
@@ -93,6 +109,7 @@ public class EspecialidadeService
             throw new SQLException("Erro! Não foi possível salvar o especialidade " + novoEspecialidade.getNome() + ". Falha na conexão com o banco de dados!");
         }
     }
+    
     /**
      * Atualiza os dados de um especialidade existente.
      *
@@ -142,6 +159,7 @@ public class EspecialidadeService
             throw new ObjectNotFoundException("Erro! Não foi possível atualizar o especialidade" + especialidadeExistente.getNome() + ". Não encontrado no banco de dados!");
         }
     }
+    
     /**
      * Deleta um especialidade da base de dados.
      *

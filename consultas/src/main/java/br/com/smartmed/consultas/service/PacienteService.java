@@ -23,6 +23,7 @@ public class PacienteService
      */
     @Autowired
     private PacienteRepository pacienteRepository;
+
     /**
      * Obtém um paciente pelo ID.
      *
@@ -36,6 +37,7 @@ public class PacienteService
         PacienteModel paciente = pacienteRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Paciente com ID " + id + " não encontrado."));
         return paciente.toDTO();
     }
+
     /**
      * Obtém a lista de todos os pacientes cadastrados.
      *
@@ -49,6 +51,68 @@ public class PacienteService
                 .map(paciente -> paciente.toDTO())
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Obtém a lista de todos os pacientes cadastrados com um nome.
+     *
+     * @return Lista de PacienteDTO representando os pacientes cadastrados com o nome.
+     */
+    @Transactional(readOnly = true)
+    public List<PacienteDTO> obterPorNome(String nome)
+    {
+        List<PacienteModel> pacientes = pacienteRepository.findByNome(nome);
+        return pacientes.stream()
+                .map(paciente -> paciente.toDTO())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Obtém um paciente pelo CPF.
+     *
+     * @param cpf CPF do paciente.
+     * @return pacienteDTO representando o paciente encontrado.
+     * @throws ObjectNotFoundException Se o paciente não for encontrado.
+     */
+    @Transactional(readOnly = true)
+    public PacienteDTO obterPorCpf(String cpf)
+    {
+        PacienteModel paciente = pacienteRepository.findByCpf(cpf).orElseThrow(() -> new ObjectNotFoundException("Paciente com ID " + cpf + " não encontrado."));
+        return paciente.toDTO();
+    }
+//
+//    /**
+//     * Verifica a existencia de um paciente pelo CPF.
+//     *
+//     * @return Se o paciente existe.
+//     */
+//    @Transactional(readOnly = true)
+//    public boolean existeCpf(String cpf)
+//    {
+//        return pacienteRepository.existsByCpf(cpf);
+//    }
+//
+//    /**
+//     * Verifica a existencia de um paciente pelo telefone.
+//     *
+//     * @return Se o paciente existe.
+//     */
+//    @Transactional(readOnly = true)
+//    public boolean existeTelefone(String telefone)
+//    {
+//        return pacienteRepository.existsByTelefone(telefone);
+//    }
+//
+//    /**
+//     * Verifica a existencia de um paciente pelo email.
+//     *
+//     * @return Se o paciente existe.
+//     */
+//    @Transactional(readOnly = true)
+//    public boolean existeEmail(String email)
+//    {
+//        return pacienteRepository.existsByEmail(email);
+//    }
+
     /**
      * Salva um novo paciente na base de dados.
      *

@@ -2,6 +2,7 @@ package br.com.smartmed.consultas.rest.controller;
 
 import br.com.smartmed.consultas.model.ConsultaModel;
 import br.com.smartmed.consultas.rest.dto.ConsultaDTO;
+import br.com.smartmed.consultas.rest.dto.ConsultaDTO;
 import br.com.smartmed.consultas.service.ConsultaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -24,6 +26,7 @@ public class ConsultaController
      */
     @Autowired
     private ConsultaService consultaService;
+    
    /**
      * Obtém um consulta pelo ID.
      * Link: http://localhost:8080/api/consulta/?
@@ -31,12 +34,13 @@ public class ConsultaController
      * @param id ID do consulta.
      * @return consultaDTO representando o consulta encontrado.
      */
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<ConsultaDTO> obterPorId(@PathVariable int id)
     {
         ConsultaDTO consultaDTO = consultaService.obterPorId(id);
         return ResponseEntity.status(HttpStatus.OK).body(consultaDTO);
     }
+    
     /**
      * Obtém a lista de todos os consultas cadastrados.
      * Link: http://localhost:8080/api/consulta
@@ -49,6 +53,33 @@ public class ConsultaController
         List<ConsultaDTO> consultaDTOList = consultaService.obterTodos();
         return ResponseEntity.ok(consultaDTOList);
     }
+
+    /**
+     * Obtém a lista de todos os consultas cadastrados com o status.
+     * Link: http://localhost:8080/api/consulta/?
+     *
+     * @return Lista de consultaDTO representando os consultas cadastrados.
+     */
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<ConsultaDTO>> obterPorStatus(@PathVariable String status)
+    {
+        List<ConsultaDTO> consultaDTOList = consultaService.obterPorStatus(status);
+        return ResponseEntity.ok(consultaDTOList);
+    }
+
+//    /**
+//     * Obtém a lista de todos os consultas cadastrados com o DataHoraConsulta.
+//     * Link: http://localhost:8080/api/consulta/?
+//     *
+//     * @return Lista de consultaDTO representando os consultas cadastrados.
+//     */
+//    @GetMapping("/data/{datahora}")
+//    public ResponseEntity<List<ConsultaDTO>> obterPorDataHoraConsulta(@PathVariable LocalDate DataHoraConsulta)
+//    {
+//        List<ConsultaDTO> consultaDTOList = consultaService.obterPorDataHoraConsulta(DataHoraConsulta);
+//        return ResponseEntity.ok(consultaDTOList);
+//    }
+    
     /**
      * Salva um novo consulta na base de dados.
      * Link: http://localhost:8080/api/consulta
@@ -62,6 +93,7 @@ public class ConsultaController
         ConsultaDTO novoConsultaDTO = consultaService.salvar(novoConsulta);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoConsultaDTO);
     }
+    
     /**
      * Atualiza os dados de um consulta existente.
      * Link: http://localhost:8080/api/consulta
@@ -76,6 +108,7 @@ public class ConsultaController
         ConsultaDTO consultaExistenteDTO = consultaService.atualizar(consultaExistente);
         return ResponseEntity.status(HttpStatus.OK).body(consultaExistenteDTO);
     }
+    
     /**
      * Deleta um consulta da base de dados.
      * Link: http://localhost:8080/api/consulta

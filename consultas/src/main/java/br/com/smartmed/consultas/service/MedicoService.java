@@ -2,7 +2,9 @@ package br.com.smartmed.consultas.service;
 
 import br.com.smartmed.consultas.exception.*;
 import br.com.smartmed.consultas.model.MedicoModel;
+import br.com.smartmed.consultas.model.MedicoModel;
 import br.com.smartmed.consultas.repository.MedicoRepository;
+import br.com.smartmed.consultas.rest.dto.MedicoDTO;
 import br.com.smartmed.consultas.rest.dto.MedicoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ public class MedicoService
      */
     @Autowired
     private MedicoRepository medicoRepository;
+    
     /**
      * Obtém um medico pelo ID.
      *
@@ -36,6 +39,7 @@ public class MedicoService
         MedicoModel medico = medicoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Médico com ID " + id + " não encontrado."));
         return medico.toDTO();
     }
+    
     /**
      * Obtém a lista de todos os medicos cadastrados.
      *
@@ -49,6 +53,35 @@ public class MedicoService
                 .map(medico -> medico.toDTO())
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Obtém a lista de todos os medicos cadastrados com um nome.
+     *
+     * @return Lista de MedicoDTO representando os medicos cadastrados com o nome.
+     */
+    @Transactional(readOnly = true)
+    public List<MedicoDTO> obterPorNome(String nome)
+    {
+        List<MedicoModel> medicos = medicoRepository.findByNome(nome);
+        return medicos.stream()
+                .map(medico -> medico.toDTO())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Obtém um medico pelo CRM.
+     *
+     * @param crm CRM do medico.
+     * @return medicoDTO representando o medico encontrado.
+     * @throws ObjectNotFoundException Se o medico não for encontrado.
+     */
+    @Transactional(readOnly = true)
+    public MedicoDTO obterPorCrm(String crm)
+    {
+        MedicoModel medico = medicoRepository.findByCrm(crm).orElseThrow(() -> new ObjectNotFoundException("Medico com ID " + crm + " não encontrado."));
+        return medico.toDTO();
+    }
+    
     /**
      * Salva um novo medico na base de dados.
      *
@@ -94,6 +127,7 @@ public class MedicoService
             throw new SQLException("Erro! Não foi possível salvar o medico " + novoMedico.getNome() + ". Falha na conexão com o banco de dados!");
         }
     }
+    
     /**
      * Atualiza os dados de um medico existente.
      *
@@ -144,6 +178,7 @@ public class MedicoService
             throw new ObjectNotFoundException("Erro! Não foi possível atualizar o medico" + medicoExistente.getNome() + ". Não encontrado no banco de dados!");
         }
     }
+    
     /**
      * Deleta um medico da base de dados.
      *

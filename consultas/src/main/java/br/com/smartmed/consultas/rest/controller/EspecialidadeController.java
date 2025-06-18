@@ -24,6 +24,7 @@ public class EspecialidadeController
      */
     @Autowired
     private EspecialidadeService especialidadeService;
+
    /**
      * Obtém um especialidade pelo ID.
      * Link: http://localhost:8080/api/especialidade/?
@@ -31,12 +32,13 @@ public class EspecialidadeController
      * @param id ID do especialidade.
      * @return especialidadeDTO representando o especialidade encontrado.
      */
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<EspecialidadeDTO> obterPorId(@PathVariable int id)
     {
         EspecialidadeDTO especialidadeDTO = especialidadeService.obterPorId(id);
         return ResponseEntity.status(HttpStatus.OK).body(especialidadeDTO);
     }
+
     /**
      * Obtém a lista de todos os especialidades cadastrados.
      * Link: http://localhost:8080/api/especialidade
@@ -49,6 +51,21 @@ public class EspecialidadeController
         List<EspecialidadeDTO> especialidadeDTOList = especialidadeService.obterTodos();
         return ResponseEntity.ok(especialidadeDTOList);
     }
+
+    /**
+     * Verifica se existe um nome.
+     * Link: http://localhost:8080/api/especialidade/existe/?
+     *
+     * @param nome nome do especialidade.
+     * @return true or false.
+     */
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<Boolean> existeNome(@PathVariable String nome)
+    {
+        boolean existe = especialidadeService.existeNome(nome);
+        return ResponseEntity.status(existe ? HttpStatus.OK : HttpStatus.NOT_FOUND).body(existe);
+    }
+
     /**
      * Salva um novo especialidade na base de dados.
      * Link: http://localhost:8080/api/especialidade
@@ -62,6 +79,7 @@ public class EspecialidadeController
         EspecialidadeDTO novoEspecialidadeDTO = especialidadeService.salvar(novoEspecialidade);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoEspecialidadeDTO);
     }
+
     /**
      * Atualiza os dados de um especialidade existente.
      * Link: http://localhost:8080/api/especialidade
@@ -76,6 +94,7 @@ public class EspecialidadeController
         EspecialidadeDTO especialidadeExistenteDTO = especialidadeService.atualizar(especialidadeExistente);
         return ResponseEntity.status(HttpStatus.OK).body(especialidadeExistenteDTO);
     }
+
     /**
      * Deleta um especialidade da base de dados.
      * Link: http://localhost:8080/api/especialidade

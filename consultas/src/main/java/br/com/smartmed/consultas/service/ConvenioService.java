@@ -2,7 +2,9 @@ package br.com.smartmed.consultas.service;
 
 import br.com.smartmed.consultas.exception.*;
 import br.com.smartmed.consultas.model.ConvenioModel;
+import br.com.smartmed.consultas.model.ConvenioModel;
 import br.com.smartmed.consultas.repository.ConvenioRepository;
+import br.com.smartmed.consultas.rest.dto.ConvenioDTO;
 import br.com.smartmed.consultas.rest.dto.ConvenioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ public class ConvenioService
      */
     @Autowired
     private ConvenioRepository convenioRepository;
+    
     /**
      * Obtém um convenio pelo ID.
      *
@@ -36,6 +39,7 @@ public class ConvenioService
         ConvenioModel convenio = convenioRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Convenio com ID " + id + " não encontrado."));
         return convenio.toDTO();
     }
+    
     /**
      * Obtém a lista de todos os convenios cadastrados.
      *
@@ -49,6 +53,35 @@ public class ConvenioService
                 .map(convenio -> convenio.toDTO())
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Obtém a lista de todos os convenios cadastrados com um nome.
+     *
+     * @return Lista de ConvenioDTO representando os convenios cadastrados com o nome.
+     */
+    @Transactional(readOnly = true)
+    public List<ConvenioDTO> obterPorNome(String nome)
+    {
+        List<ConvenioModel> convenios = convenioRepository.findByNome(nome);
+        return convenios.stream()
+                .map(convenio -> convenio.toDTO())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Obtém um convenio pelo CNPJ.
+     *
+     * @param cnpj CNPJ do convenio.
+     * @return convenioDTO representando o convenio encontrado.
+     * @throws ObjectNotFoundException Se o convenio não for encontrado.
+     */
+    @Transactional(readOnly = true)
+    public ConvenioDTO obterPorCnpj(String cnpj)
+    {
+        ConvenioModel convenio = convenioRepository.findByCnpj(cnpj).orElseThrow(() -> new ObjectNotFoundException("Convenio com ID " + cnpj + " não encontrado."));
+        return convenio.toDTO();
+    }
+    
     /**
      * Salva um novo convenio na base de dados.
      *
@@ -93,6 +126,7 @@ public class ConvenioService
             throw new SQLException("Erro! Não foi possível salvar o convenio " + novoConvenio.getNome() + ". Falha na conexão com o banco de dados!");
         }
     }
+    
     /**
      * Atualiza os dados de um convenio existente.
      *
@@ -142,6 +176,7 @@ public class ConvenioService
             throw new ObjectNotFoundException("Erro! Não foi possível atualizar o convenio" + convenioExistente.getNome() + ". Não encontrado no banco de dados!");
         }
     }
+    
     /**
      * Deleta um convenio da base de dados.
      *

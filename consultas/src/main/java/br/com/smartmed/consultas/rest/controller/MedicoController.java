@@ -2,6 +2,7 @@ package br.com.smartmed.consultas.rest.controller;
 
 import br.com.smartmed.consultas.model.MedicoModel;
 import br.com.smartmed.consultas.rest.dto.MedicoDTO;
+import br.com.smartmed.consultas.rest.dto.MedicoDTO;
 import br.com.smartmed.consultas.service.MedicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class MedicoController
      */
     @Autowired
     private MedicoService medicoService;
+    
    /**
      * Obtém um medico pelo ID.
      * Link: http://localhost:8080/api/medico/?
@@ -31,12 +33,13 @@ public class MedicoController
      * @param id ID do medico.
      * @return medicoDTO representando o medico encontrado.
      */
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<MedicoDTO> obterPorId(@PathVariable int id)
     {
         MedicoDTO medicoDTO = medicoService.obterPorId(id);
         return ResponseEntity.status(HttpStatus.OK).body(medicoDTO);
     }
+    
     /**
      * Obtém a lista de todos os medicos cadastrados.
      * Link: http://localhost:8080/api/medico
@@ -49,6 +52,34 @@ public class MedicoController
         List<MedicoDTO> medicoDTOList = medicoService.obterTodos();
         return ResponseEntity.ok(medicoDTOList);
     }
+
+    /**
+     * Obtém a lista de todos os medicos cadastrados com o nome.
+     * Link: http://localhost:8080/api/medico/?
+     *
+     * @return Lista de medicoDTO representando os medicos cadastrados.
+     */
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<List<MedicoDTO>> obterPorNome(@PathVariable String nome)
+    {
+        List<MedicoDTO> medicoDTOList = medicoService.obterPorNome(nome);
+        return ResponseEntity.ok(medicoDTOList);
+    }
+
+    /**
+     * Obtém um medico pelo CRM.
+     * Link: http://localhost:8080/api/medico/?
+     *
+     * @param crm CRM do medico.
+     * @return medicoDTO representando o medico encontrado.
+     */
+    @GetMapping("/crm/{crm}")
+    public ResponseEntity<MedicoDTO> obterPorCrm(@PathVariable String crm)
+    {
+        MedicoDTO medicoDTO = medicoService.obterPorCrm(crm);
+        return ResponseEntity.status(HttpStatus.OK).body(medicoDTO);
+    }
+    
     /**
      * Salva um novo medico na base de dados.
      * Link: http://localhost:8080/api/medico
@@ -62,6 +93,7 @@ public class MedicoController
         MedicoDTO novoMedicoDTO = medicoService.salvar(novoMedico);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoMedicoDTO);
     }
+    
     /**
      * Atualiza os dados de um medico existente.
      * Link: http://localhost:8080/api/medico
@@ -76,6 +108,7 @@ public class MedicoController
         MedicoDTO medicoExistenteDTO = medicoService.atualizar(medicoExistente);
         return ResponseEntity.status(HttpStatus.OK).body(medicoExistenteDTO);
     }
+    
     /**
      * Deleta um medico da base de dados.
      * Link: http://localhost:8080/api/medico
