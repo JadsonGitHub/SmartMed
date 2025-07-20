@@ -5,8 +5,8 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class RecepcionistaDTO
-{
+public class RecepcionistaDTO {
+
     private int id;
     private String nome;
     // private String cpf;

@@ -16,8 +16,8 @@ import org.modelmapper.ModelMapper;
 @NoArgsConstructor
 @Entity
 @Table(name = "medico")
-public class MedicoModel
-{
+public class MedicoModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -51,8 +51,7 @@ public class MedicoModel
     @Column(name = "especialidadeID", nullable = false)
     private int especialidadeID;
 
-    public MedicoDTO toDTO()
-    {
+    public MedicoDTO toDTO() {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(this, MedicoDTO.class);
     }

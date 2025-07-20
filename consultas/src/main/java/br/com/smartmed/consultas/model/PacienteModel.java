@@ -19,8 +19,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "paciente")
-public class PacienteModel
-{
+public class PacienteModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -48,8 +48,7 @@ public class PacienteModel
     @Email(message = "E-mail inválido.")
     private String email;
 
-    public PacienteDTO toDTO()
-    {
+    public PacienteDTO toDTO() {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(this, PacienteDTO.class);
     }

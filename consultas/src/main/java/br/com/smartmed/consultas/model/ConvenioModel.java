@@ -17,14 +17,14 @@ import org.modelmapper.ModelMapper;
 @NoArgsConstructor
 @Entity
 @Table(name = "convenio")
-public class ConvenioModel
-{
+public class ConvenioModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "nome", length = 255, nullable = false,  unique = true)
+    @Column(name = "nome", length = 255, nullable = false, unique = true)
     @NotNull(message = "O nome não pode ser nulo.")
     @NotBlank(message = "O nome é obrigatório.")
     private String nome;
@@ -46,8 +46,7 @@ public class ConvenioModel
     @Column(name = "ativo", nullable = false)
     private boolean ativo;
 
-    public ConvenioDTO toDTO()
-    {
+    public ConvenioDTO toDTO() {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(this, ConvenioDTO.class);
     }

@@ -14,14 +14,14 @@ import org.modelmapper.ModelMapper;
 @NoArgsConstructor
 @Entity
 @Table(name = "especialidade")
-public class EspecialidadeModel
-{
+public class EspecialidadeModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "nome", length = 64, nullable = false,  unique = true)
+    @Column(name = "nome", length = 64, nullable = false, unique = true)
     @NotNull(message = "O nome não pode ser nulo.")
     @NotBlank(message = "O nome é obrigatório.")
     private String nome;
@@ -29,8 +29,7 @@ public class EspecialidadeModel
     @Column(name = "descricao", length = 255, nullable = true)
     private String descricao;
 
-    public EspecialidadeDTO toDTO()
-    {
+    public EspecialidadeDTO toDTO() {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(this, EspecialidadeDTO.class);
     }

@@ -15,8 +15,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "consulta")
-public class  ConsultaModel
-{
+public class ConsultaModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -50,8 +50,7 @@ public class  ConsultaModel
     @Column(name = "recepcionistaID", nullable = false)
     private int recepcionistaID;
 
-    public ConsultaDTO toDTO()
-    {
+    public ConsultaDTO toDTO() {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(this, ConsultaDTO.class);
     }

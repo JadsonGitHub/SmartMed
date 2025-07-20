@@ -12,8 +12,8 @@ import org.modelmapper.ModelMapper;
 @NoArgsConstructor
 @Entity
 @Table(name = "forma_pagamento")
-public class FormaPagamentoModel
-{
+public class FormaPagamentoModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -22,8 +22,7 @@ public class FormaPagamentoModel
     @Column(name = "descricao", length = 64, nullable = true)
     private String descricao;
 
-    public FormaPagamentoDTO toDTO()
-    {
+    public FormaPagamentoDTO toDTO() {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(this, FormaPagamentoDTO.class);
     }

@@ -3,8 +3,8 @@ package br.com.smartmed.consultas.rest.dto;
 import lombok.Data;
 
 @Data
-public class ConvenioDTO
-{
+public class ConvenioDTO {
+
     private int id;
     private String nome;
     private String cnpj;

@@ -8,34 +8,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RecepcionistaRepository extends JpaRepository<RecepcionistaModel, Integer>
-{
+public interface RecepcionistaRepository extends JpaRepository<RecepcionistaModel, Integer> {
+
     List<RecepcionistaModel> findByNome(String pNome);
 
     Optional<RecepcionistaModel> findByCpf(String pCpf);
 
     List<RecepcionistaModel> findByAtivo(Boolean pAtivo);
 
-    /**
-     * Verifica se existe um recepcionista cadastrado com o cpf especificado.
-     *
-     * @param cpf O cpf a ser verificado.
-     * @return {@code true} se existir um recepcionista com o cpf fornecido, {@code false} caso contrário.
-     */
     boolean existsByCpf(String cpf);
-    /**
-     * Verifica se existe um recepcionista cadastrado com o telefone especificado.
-     *
-     * @param telefone O telefone a ser verificado.
-     * @return {@code true} se existir um recepcionista com o telefone fornecido, {@code false} caso contrário.
-     */
-    boolean existsByTelefone(String telefone);
-    /**
-     * Verifica se existe um recepcionista cadastrado com o e-mail especificado.
-     *
-     * @param email O e-mail a ser verificado.
-     * @return {@code true} se existir um recepcionista com o e-mail fornecido, {@code false} caso contrário.
-     */
-    boolean existsByEmail(String email);
 
+    boolean existsByTelefone(String telefone);
+
+    boolean existsByEmail(String email);
 }

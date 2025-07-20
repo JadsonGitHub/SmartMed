@@ -19,8 +19,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "recepcionista")
-public class RecepcionistaModel
-{
+public class RecepcionistaModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -57,8 +57,7 @@ public class RecepcionistaModel
     @Column(name = "ativo", nullable = false)
     private boolean ativo;
 
-    public RecepcionistaDTO toDTO()
-    {
+    public RecepcionistaDTO toDTO() {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(this, RecepcionistaDTO.class);
     }
