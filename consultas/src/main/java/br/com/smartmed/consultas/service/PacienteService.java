@@ -4,6 +4,7 @@ import br.com.smartmed.consultas.exception.*;
 import br.com.smartmed.consultas.model.PacienteModel;
 import br.com.smartmed.consultas.repository.PacienteRepository;
 import br.com.smartmed.consultas.rest.dto.PacienteDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,55 +14,57 @@ import java.util.stream.Collectors;
 
 @Service
 public class PacienteService {
-
     @Autowired
     private PacienteRepository pacienteRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Transactional(readOnly = true)
     public PacienteDTO obterPorId(int id) {
         PacienteModel paciente = pacienteRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Paciente com ID " + id + " não encontrado."));
-        return paciente.toDTO();
+//        return paciente.toDTO();
+        return modelMapper.map(paciente, PacienteDTO.class);
     }
 
     @Transactional(readOnly = true)
     public List<PacienteDTO> obterTodos() {
         List<PacienteModel> pacientes = pacienteRepository.findAll();
+//        return pacientes.stream()
+//                .map(paciente -> paciente.toDTO())
+//                .collect(Collectors.toList());
         return pacientes.stream()
-                .map(paciente -> paciente.toDTO())
+                .map(paciente -> modelMapper.map(paciente, PacienteDTO.class))
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public List<PacienteDTO> obterPorNome(String nome) {
         List<PacienteModel> pacientes = pacienteRepository.findByNome(nome);
+//        return pacientes.stream()
+//                .map(paciente -> paciente.toDTO())
+//                .collect(Collectors.toList());
         return pacientes.stream()
-                .map(paciente -> paciente.toDTO())
+                .map(paciente -> modelMapper.map(paciente, PacienteDTO.class))
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public PacienteDTO obterPorCpf(String cpf) {
         PacienteModel paciente = pacienteRepository.findByCpf(cpf).orElseThrow(() -> new ObjectNotFoundException("Paciente com ID " + cpf + " não encontrado."));
-        return paciente.toDTO();
+//        return paciente.toDTO();
+        return modelMapper.map(paciente, PacienteDTO.class);
     }
-//
-//    @Transactional(readOnly = true)
-//    public boolean existeCpf(String cpf)
-//    {
-//        return pacienteRepository.existsByCpf(cpf);
-//    }
-//
-//    @Transactional(readOnly = true)
-//    public boolean existeTelefone(String telefone)
-//    {
-//        return pacienteRepository.existsByTelefone(telefone);
-//    }
-//
-//    @Transactional(readOnly = true)
-//    public boolean existeEmail(String email)
-//    {
-//        return pacienteRepository.existsByEmail(email);
-//    }
+
+    @Transactional(readOnly = true)
+    public boolean existeTelefone(String telefone) {
+        return pacienteRepository.existsByTelefone(telefone);
+    }
+
+    @Transactional(readOnly = true)
+    public boolean existeEmail(String email) {
+        return pacienteRepository.existsByEmail(email);
+    }
 
     @Transactional
     public PacienteDTO salvar(PacienteModel novoPaciente) {
@@ -71,7 +74,8 @@ public class PacienteService {
                 throw new ConstraintException("Já existe um paciente com esse CPF " + novoPaciente.getCpf() + " na base de dados!");
             }
             //Salva o novo paciente na base de dados.
-            return pacienteRepository.save(novoPaciente).toDTO();
+//            return pacienteRepository.save(novoPaciente).toDTO();
+            return modelMapper.map(pacienteRepository.save(novoPaciente), PacienteDTO.class);
         } catch (DataIntegrityException e) {
             throw new DataIntegrityException("Erro! Não foi possível salvar o paciente " + novoPaciente.getNome() + " !");
         } catch (ConstraintException e) {
@@ -95,7 +99,8 @@ public class PacienteService {
                 throw new ConstraintException("O paciente com esse CPF " + pacienteExistente.getCpf() + " não existe na base de dados!");
             }
             //Atualiza o paciente na base de dados.
-            return pacienteRepository.save(pacienteExistente).toDTO();
+//            return pacienteRepository.save(pacienteExistente).toDTO();
+            return modelMapper.map(pacienteRepository.save(pacienteExistente), PacienteDTO.class);
         } catch (DataIntegrityException e) {
             throw new DataIntegrityException("Erro! Não foi possível atualizar o paciente " + pacienteExistente.getNome() + " !");
         } catch (ConstraintException e) {

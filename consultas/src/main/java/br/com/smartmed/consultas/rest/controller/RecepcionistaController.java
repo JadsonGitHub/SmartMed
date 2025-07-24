@@ -14,11 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/recepcionista")
 public class RecepcionistaController {
-
     @Autowired
     private RecepcionistaService recepcionistaService;
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<RecepcionistaDTO> obterPorId(@PathVariable int id) {
         RecepcionistaDTO recepcionistaDTO = recepcionistaService.obterPorId(id);
         return ResponseEntity.status(HttpStatus.OK).body(recepcionistaDTO);
@@ -30,13 +29,13 @@ public class RecepcionistaController {
         return ResponseEntity.ok(recepcionistaDTOList);
     }
 
-    @GetMapping("/nome/{nome}")
+    @GetMapping("/{nome}")
     public ResponseEntity<List<RecepcionistaDTO>> obterPorNome(@PathVariable String nome) {
         List<RecepcionistaDTO> recepcionistaDTOList = recepcionistaService.obterPorNome(nome);
         return ResponseEntity.ok(recepcionistaDTOList);
     }
 
-    @GetMapping("/cpf/{cpf}")
+    @GetMapping("/{cpf}")
     public ResponseEntity<RecepcionistaDTO> obterPorCpf(@PathVariable String cpf) {
         RecepcionistaDTO recepcionistaDTO = recepcionistaService.obterPorCpf(cpf);
         return ResponseEntity.status(HttpStatus.OK).body(recepcionistaDTO);

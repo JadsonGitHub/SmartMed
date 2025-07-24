@@ -4,6 +4,7 @@ import br.com.smartmed.consultas.exception.*;
 import br.com.smartmed.consultas.model.EspecialidadeModel;
 import br.com.smartmed.consultas.repository.EspecialidadeRepository;
 import br.com.smartmed.consultas.rest.dto.EspecialidadeDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,21 +14,23 @@ import java.util.stream.Collectors;
 
 @Service
 public class EspecialidadeService {
-
     @Autowired
     private EspecialidadeRepository especialidadeRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Transactional(readOnly = true)
     public EspecialidadeDTO obterPorId(int id) {
         EspecialidadeModel especialidade = especialidadeRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Especialidade com ID " + id + " não encontrado."));
-        return especialidade.toDTO();
+        return modelMapper.map(especialidade, EspecialidadeDTO.class);
     }
 
     @Transactional(readOnly = true)
     public List<EspecialidadeDTO> obterTodos() {
         List<EspecialidadeModel> especialidades = especialidadeRepository.findAll();
         return especialidades.stream()
-                .map(especialidade -> especialidade.toDTO())
+                .map(especialidade -> modelMapper.map(especialidade, EspecialidadeDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -44,7 +47,7 @@ public class EspecialidadeService {
                 throw new ConstraintException("Já existe um especialidade com esse ID " + novoEspecialidade.getId() + " na base de dados!");
             }
             //Salva o novo especialidade na base de dados.
-            return especialidadeRepository.save(novoEspecialidade).toDTO();
+            return modelMapper.map(especialidadeRepository.save(novoEspecialidade), EspecialidadeDTO.class);
         } catch (DataIntegrityException e) {
             throw new DataIntegrityException("Erro! Não foi possível salvar o especialidade " + novoEspecialidade.getNome() + " !");
         } catch (ConstraintException e) {
@@ -68,7 +71,7 @@ public class EspecialidadeService {
                 throw new ConstraintException("O especialidade com esse ID " + especialidadeExistente.getId() + " não existe na base de dados!");
             }
             //Atualiza o especialidade na base de dados.
-            return especialidadeRepository.save(especialidadeExistente).toDTO();
+            return modelMapper.map(especialidadeRepository.save(especialidadeExistente), EspecialidadeDTO.class);
         } catch (DataIntegrityException e) {
             throw new DataIntegrityException("Erro! Não foi possível atualizar o especialidade " + especialidadeExistente.getNome() + " !");
         } catch (ConstraintException e) {

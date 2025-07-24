@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class MedicoDTO {
-
     private int id;
     private String nome;
     private String crm;

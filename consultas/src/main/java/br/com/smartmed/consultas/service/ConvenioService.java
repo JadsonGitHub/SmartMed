@@ -4,6 +4,7 @@ import br.com.smartmed.consultas.exception.*;
 import br.com.smartmed.consultas.model.ConvenioModel;
 import br.com.smartmed.consultas.repository.ConvenioRepository;
 import br.com.smartmed.consultas.rest.dto.ConvenioDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,36 +14,30 @@ import java.util.stream.Collectors;
 
 @Service
 public class ConvenioService {
-
     @Autowired
     private ConvenioRepository convenioRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Transactional(readOnly = true)
     public ConvenioDTO obterPorId(int id) {
         ConvenioModel convenio = convenioRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Convenio com ID " + id + " não encontrado."));
-        return convenio.toDTO();
+        return modelMapper.map(convenio, ConvenioDTO.class);
     }
 
     @Transactional(readOnly = true)
     public List<ConvenioDTO> obterTodos() {
         List<ConvenioModel> convenios = convenioRepository.findAll();
         return convenios.stream()
-                .map(convenio -> convenio.toDTO())
-                .collect(Collectors.toList());
-    }
-
-    @Transactional(readOnly = true)
-    public List<ConvenioDTO> obterPorNome(String nome) {
-        List<ConvenioModel> convenios = convenioRepository.findByNome(nome);
-        return convenios.stream()
-                .map(convenio -> convenio.toDTO())
+                .map(convenio -> modelMapper.map(convenio, ConvenioDTO.class))
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public ConvenioDTO obterPorCnpj(String cnpj) {
         ConvenioModel convenio = convenioRepository.findByCnpj(cnpj).orElseThrow(() -> new ObjectNotFoundException("Convenio com ID " + cnpj + " não encontrado."));
-        return convenio.toDTO();
+        return modelMapper.map(convenio, ConvenioDTO.class);
     }
 
     @Transactional
@@ -53,7 +48,7 @@ public class ConvenioService {
                 throw new ConstraintException("Já existe um convenio com esse CNPJ " + novoConvenio.getCnpj() + " na base de dados!");
             }
             //Salva o novo convenio na base de dados.
-            return convenioRepository.save(novoConvenio).toDTO();
+            return modelMapper.map(convenioRepository.save(novoConvenio), ConvenioDTO.class);
         } catch (DataIntegrityException e) {
             throw new DataIntegrityException("Erro! Não foi possível salvar o convenio " + novoConvenio.getNome() + " !");
         } catch (ConstraintException e) {
@@ -77,7 +72,7 @@ public class ConvenioService {
                 throw new ConstraintException("O convenio com esse CNPJ " + convenioExistente.getCnpj() + " não existe na base de dados!");
             }
             //Atualiza o convenio na base de dados.
-            return convenioRepository.save(convenioExistente).toDTO();
+            return modelMapper.map(convenioRepository.save(convenioExistente), ConvenioDTO.class);
         } catch (DataIntegrityException e) {
             throw new DataIntegrityException("Erro! Não foi possível atualizar o convenio " + convenioExistente.getNome() + " !");
         } catch (ConstraintException e) {

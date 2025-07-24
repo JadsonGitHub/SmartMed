@@ -14,11 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/paciente")
 public class PacienteController {
-
     @Autowired
     private PacienteService pacienteService;
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<PacienteDTO> obterPorId(@PathVariable int id) {
         PacienteDTO pacienteDTO = pacienteService.obterPorId(id);
         return ResponseEntity.status(HttpStatus.OK).body(pacienteDTO);
@@ -30,38 +29,29 @@ public class PacienteController {
         return ResponseEntity.ok(pacienteDTOList);
     }
 
-    @GetMapping("/nome/{nome}")
+    @GetMapping("/{nome}")
     public ResponseEntity<List<PacienteDTO>> obterPorNome(@PathVariable String nome) {
         List<PacienteDTO> pacienteDTOList = pacienteService.obterPorNome(nome);
         return ResponseEntity.ok(pacienteDTOList);
     }
 
-    @GetMapping("/cpf/{cpf}")
+    @GetMapping("/{cpf}")
     public ResponseEntity<PacienteDTO> obterPorCpf(@PathVariable String cpf) {
         PacienteDTO pacienteDTO = pacienteService.obterPorCpf(cpf);
         return ResponseEntity.status(HttpStatus.OK).body(pacienteDTO);
     }
-//
-//    @GetMapping("/existe/{cpf}")
-//    public ResponseEntity<Boolean> existeCpf(@PathVariable String cpf)
-//    {
-//        boolean existe = pacienteService.existeCpf(cpf);
-//        return ResponseEntity.status(existe ? HttpStatus.OK : HttpStatus.NOT_FOUND).body(existe);
-//    }
-//
-//    @GetMapping("/existe/{Telefone}")
-//    public ResponseEntity<Boolean> existeTelefone(@PathVariable String Telefone)
-//    {
-//        boolean existe = pacienteService.existeTelefone(Telefone);
-//        return ResponseEntity.status(existe ? HttpStatus.OK : HttpStatus.NOT_FOUND).body(existe);
-//    }
-//
-//    @GetMapping("/existe/{email}")
-//    public ResponseEntity<Boolean> existeEmail(@PathVariable String email)
-//    {
-//        boolean existe = pacienteService.existeEmail(email);
-//        return ResponseEntity.status(existe ? HttpStatus.OK : HttpStatus.NOT_FOUND).body(existe);
-//    }
+
+    @GetMapping("/{Telefone}")
+    public ResponseEntity<Boolean> existeTelefone(@PathVariable String Telefone) {
+        boolean existe = pacienteService.existeTelefone(Telefone);
+        return ResponseEntity.status(existe ? HttpStatus.OK : HttpStatus.NOT_FOUND).body(existe);
+    }
+
+    @GetMapping("/{email}")
+    public ResponseEntity<Boolean> existeEmail(@PathVariable String email) {
+        boolean existe = pacienteService.existeEmail(email);
+        return ResponseEntity.status(existe ? HttpStatus.OK : HttpStatus.NOT_FOUND).body(existe);
+    }
 
     @PostMapping()
     public ResponseEntity<PacienteDTO> salvar(@Valid @RequestBody PacienteModel novoPaciente) {
@@ -77,6 +67,6 @@ public class PacienteController {
 
     @DeleteMapping
     public void deletar(@Valid @RequestBody PacienteModel pacienteExistente) {
-        pacienteService.deletar(pacienteExistente);
+        this.pacienteService.deletar(pacienteExistente);
     }
 }

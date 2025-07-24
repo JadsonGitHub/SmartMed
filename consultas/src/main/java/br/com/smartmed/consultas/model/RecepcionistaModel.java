@@ -1,6 +1,5 @@
 package br.com.smartmed.consultas.model;
 
-import br.com.smartmed.consultas.rest.dto.RecepcionistaDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -10,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
-import org.modelmapper.ModelMapper;
 
 import java.time.LocalDate;
 
@@ -20,7 +18,6 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "recepcionista")
 public class RecepcionistaModel {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -57,8 +54,9 @@ public class RecepcionistaModel {
     @Column(name = "ativo", nullable = false)
     private boolean ativo;
 
-    public RecepcionistaDTO toDTO() {
-        ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(this, RecepcionistaDTO.class);
-    }
+//    memory leak
+//    public RecepcionistaDTO toDTO() {
+//        ModelMapper modelMapper = new ModelMapper();
+//        return modelMapper.map(this, RecepcionistaDTO.class);
+//    }
 }

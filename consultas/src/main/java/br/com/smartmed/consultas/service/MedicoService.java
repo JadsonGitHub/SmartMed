@@ -4,6 +4,7 @@ import br.com.smartmed.consultas.exception.*;
 import br.com.smartmed.consultas.model.MedicoModel;
 import br.com.smartmed.consultas.repository.MedicoRepository;
 import br.com.smartmed.consultas.rest.dto.MedicoDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,21 +14,23 @@ import java.util.stream.Collectors;
 
 @Service
 public class MedicoService {
-
     @Autowired
     private MedicoRepository medicoRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Transactional(readOnly = true)
     public MedicoDTO obterPorId(int id) {
         MedicoModel medico = medicoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Médico com ID " + id + " não encontrado."));
-        return medico.toDTO();
+        return modelMapper.map(medico, MedicoDTO.class);
     }
 
     @Transactional(readOnly = true)
     public List<MedicoDTO> obterTodos() {
         List<MedicoModel> medicos = medicoRepository.findAll();
         return medicos.stream()
-                .map(medico -> medico.toDTO())
+                .map(medico -> modelMapper.map(medico, MedicoDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -35,14 +38,14 @@ public class MedicoService {
     public List<MedicoDTO> obterPorNome(String nome) {
         List<MedicoModel> medicos = medicoRepository.findByNome(nome);
         return medicos.stream()
-                .map(medico -> medico.toDTO())
+                .map(medico -> modelMapper.map(medico, MedicoDTO.class))
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public MedicoDTO obterPorCrm(String crm) {
         MedicoModel medico = medicoRepository.findByCrm(crm).orElseThrow(() -> new ObjectNotFoundException("Medico com ID " + crm + " não encontrado."));
-        return medico.toDTO();
+        return modelMapper.map(medico, MedicoDTO.class);
     }
 
     @Transactional
@@ -53,7 +56,7 @@ public class MedicoService {
                 throw new ConstraintException("Já existe um medico com esse CRM " + novoMedico.getCrm() + " na base de dados!");
             }
             //Salva o novo medico na base de dados.
-            return medicoRepository.save(novoMedico).toDTO();
+            return modelMapper.map(medicoRepository.save(novoMedico), MedicoDTO.class);
         } catch (DataIntegrityException e) {
             throw new DataIntegrityException("Erro! Não foi possível salvar o medico " + novoMedico.getNome() + " !");
         } catch (ConstraintException e) {
@@ -77,7 +80,7 @@ public class MedicoService {
                 throw new ConstraintException("O medico com esse CRM " + medicoExistente.getCrm() + " não existe na base de dados!");
             }
             //Atualiza o medico na base de dados.
-            return medicoRepository.save(medicoExistente).toDTO();
+            return modelMapper.map(medicoRepository.save(medicoExistente), MedicoDTO.class);
 
         } catch (DataIntegrityException e) {
             throw new DataIntegrityException("Erro! Não foi possível atualizar o medico " + medicoExistente.getNome() + " !");

@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FormaPagamentoRepository extends JpaRepository<FormaPagamentoModel, Integer> {
-
 }

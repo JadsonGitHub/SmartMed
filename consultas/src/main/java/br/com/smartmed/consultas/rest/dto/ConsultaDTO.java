@@ -6,7 +6,6 @@ import java.time.LocalDate;
 
 @Data
 public class ConsultaDTO {
-
     private int id;
     private LocalDate dataHoraConsulta;
     private String status;

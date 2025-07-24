@@ -4,6 +4,7 @@ import br.com.smartmed.consultas.exception.*;
 import br.com.smartmed.consultas.model.FormaPagamentoModel;
 import br.com.smartmed.consultas.repository.FormaPagamentoRepository;
 import br.com.smartmed.consultas.rest.dto.FormaPagamentoDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,21 +14,23 @@ import java.util.stream.Collectors;
 
 @Service
 public class FormaPagamentoService {
-
     @Autowired
     private FormaPagamentoRepository formaPagamentoRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Transactional(readOnly = true)
     public FormaPagamentoDTO obterPorId(int id) {
         FormaPagamentoModel formaPagamento = formaPagamentoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("FormaPagamento com ID " + id + " não encontrado."));
-        return formaPagamento.toDTO();
+        return modelMapper.map(formaPagamento, FormaPagamentoDTO.class);
     }
 
     @Transactional(readOnly = true)
     public List<FormaPagamentoDTO> obterTodos() {
         List<FormaPagamentoModel> formaPagamentos = formaPagamentoRepository.findAll();
         return formaPagamentos.stream()
-                .map(formaPagamento -> formaPagamento.toDTO())
+                .map(formaPagamento -> modelMapper.map(formaPagamento, FormaPagamentoDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -39,7 +42,7 @@ public class FormaPagamentoService {
                 throw new ConstraintException("Já existe um formaPagamento com esse ID " + novoFormaPagamento.getId() + " na base de dados!");
             }
             //Salva o novo formaPagamento na base de dados.
-            return formaPagamentoRepository.save(novoFormaPagamento).toDTO();
+            return modelMapper.map(formaPagamentoRepository.save(novoFormaPagamento), FormaPagamentoDTO.class);
         } catch (DataIntegrityException e) {
             throw new DataIntegrityException("Erro! Não foi possível salvar o formaPagamento " + novoFormaPagamento.getDescricao() + " !");
         } catch (ConstraintException e) {
@@ -63,7 +66,7 @@ public class FormaPagamentoService {
                 throw new ConstraintException("O formaPagamento com esse ID " + formaPagamentoExistente.getId() + " não existe na base de dados!");
             }
             //Atualiza o formaPagamento na base de dados.
-            return formaPagamentoRepository.save(formaPagamentoExistente).toDTO();
+            return modelMapper.map(formaPagamentoRepository.save(formaPagamentoExistente), FormaPagamentoDTO.class);
         } catch (DataIntegrityException e) {
             throw new DataIntegrityException("Erro! Não foi possível atualizar o formaPagamento " + formaPagamentoExistente.getDescricao() + " !");
         } catch (ConstraintException e) {

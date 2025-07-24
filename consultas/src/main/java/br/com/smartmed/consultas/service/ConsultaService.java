@@ -4,6 +4,7 @@ import br.com.smartmed.consultas.exception.*;
 import br.com.smartmed.consultas.model.ConsultaModel;
 import br.com.smartmed.consultas.repository.ConsultaRepository;
 import br.com.smartmed.consultas.rest.dto.ConsultaDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,21 +15,23 @@ import java.util.stream.Collectors;
 
 @Service
 public class ConsultaService {
-
     @Autowired
     private ConsultaRepository consultaRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Transactional(readOnly = true)
     public ConsultaDTO obterPorId(int id) {
         ConsultaModel consulta = consultaRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Consulta com ID " + id + " não encontrado."));
-        return consulta.toDTO();
+        return modelMapper.map(consulta, ConsultaDTO.class);
     }
 
     @Transactional(readOnly = true)
     public List<ConsultaDTO> obterTodos() {
         List<ConsultaModel> consultas = consultaRepository.findAll();
         return consultas.stream()
-                .map(consulta -> consulta.toDTO())
+                .map(consulta -> modelMapper.map(consulta, ConsultaDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -36,7 +39,7 @@ public class ConsultaService {
     public List<ConsultaDTO> obterPorDataHoraConsulta(LocalDate DataHoraConsulta) {
         List<ConsultaModel> consultas = consultaRepository.findByDataHoraConsulta(DataHoraConsulta);
         return consultas.stream()
-                .map(consulta -> consulta.toDTO())
+                .map(consulta -> modelMapper.map(consulta, ConsultaDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -44,7 +47,7 @@ public class ConsultaService {
     public List<ConsultaDTO> obterPorPacienteID(int PacienteID) {
         List<ConsultaModel> consultas = consultaRepository.findByPacienteID(PacienteID);
         return consultas.stream()
-                .map(consulta -> consulta.toDTO())
+                .map(consulta -> modelMapper.map(consulta, ConsultaDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -52,7 +55,7 @@ public class ConsultaService {
     public List<ConsultaDTO> obterPorMedicoID(int MedicoID) {
         List<ConsultaModel> consultas = consultaRepository.findByMedicoID(MedicoID);
         return consultas.stream()
-                .map(consulta -> consulta.toDTO())
+                .map(consulta -> modelMapper.map(consulta, ConsultaDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -60,7 +63,7 @@ public class ConsultaService {
     public List<ConsultaDTO> obterPorConvenioID(int ConvenioID) {
         List<ConsultaModel> consultas = consultaRepository.findByConvenioID(ConvenioID);
         return consultas.stream()
-                .map(consulta -> consulta.toDTO())
+                .map(consulta -> modelMapper.map(consulta, ConsultaDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -68,7 +71,7 @@ public class ConsultaService {
     public List<ConsultaDTO> obterPorStatus(String Status) {
         List<ConsultaModel> consultas = consultaRepository.findByStatus(Status);
         return consultas.stream()
-                .map(consulta -> consulta.toDTO())
+                .map(consulta -> modelMapper.map(consulta, ConsultaDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -76,7 +79,7 @@ public class ConsultaService {
     public List<ConsultaDTO> obterPorRecepcionistaID(int RecepcionistaID) {
         List<ConsultaModel> consultas = consultaRepository.findByRecepcionistaID(RecepcionistaID);
         return consultas.stream()
-                .map(consulta -> consulta.toDTO())
+                .map(consulta -> modelMapper.map(consulta, ConsultaDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -88,7 +91,7 @@ public class ConsultaService {
                 throw new ConstraintException("Já existe um consulta com esse ID " + novoConsulta.getId() + " na base de dados!");
             }
             //Salva o novo consulta na base de dados.
-            return consultaRepository.save(novoConsulta).toDTO();
+            return modelMapper.map(consultaRepository.save(novoConsulta), ConsultaDTO.class);
         } catch (DataIntegrityException e) {
             throw new DataIntegrityException("Erro! Não foi possível salvar o consulta " + novoConsulta.getStatus() + " !");
         } catch (ConstraintException e) {
@@ -112,7 +115,7 @@ public class ConsultaService {
                 throw new ConstraintException("O consulta com esse ID " + consultaExistente.getId() + " não existe na base de dados!");
             }
             //Atualiza o consulta na base de dados.
-            return consultaRepository.save(consultaExistente).toDTO();
+            return modelMapper.map(consultaRepository.save(consultaExistente), ConsultaDTO.class);
         } catch (DataIntegrityException e) {
             throw new DataIntegrityException("Erro! Não foi possível atualizar o consulta " + consultaExistente.getStatus() + " !");
         } catch (ConstraintException e) {

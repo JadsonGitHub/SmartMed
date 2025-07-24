@@ -9,16 +9,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequestMapping("/consulta")
 public class ConsultaController {
-
     @Autowired
     private ConsultaService consultaService;
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ConsultaDTO> obterPorId(@PathVariable int id) {
         ConsultaDTO consultaDTO = consultaService.obterPorId(id);
         return ResponseEntity.status(HttpStatus.OK).body(consultaDTO);
@@ -30,18 +30,17 @@ public class ConsultaController {
         return ResponseEntity.ok(consultaDTOList);
     }
 
-    @GetMapping("/status/{status}")
+    @GetMapping("/{status}")
     public ResponseEntity<List<ConsultaDTO>> obterPorStatus(@PathVariable String status) {
         List<ConsultaDTO> consultaDTOList = consultaService.obterPorStatus(status);
         return ResponseEntity.ok(consultaDTOList);
     }
 
-//    @GetMapping("/data/{datahora}")
-//    public ResponseEntity<List<ConsultaDTO>> obterPorDataHoraConsulta(@PathVariable LocalDate DataHoraConsulta)
-//    {
-//        List<ConsultaDTO> consultaDTOList = consultaService.obterPorDataHoraConsulta(DataHoraConsulta);
-//        return ResponseEntity.ok(consultaDTOList);
-//    }
+    @GetMapping("/{datahora}")
+    public ResponseEntity<List<ConsultaDTO>> obterPorDataHoraConsulta(@PathVariable LocalDate DataHoraConsulta) {
+        List<ConsultaDTO> consultaDTOList = consultaService.obterPorDataHoraConsulta(DataHoraConsulta);
+        return ResponseEntity.ok(consultaDTOList);
+    }
 
     @PostMapping()
     public ResponseEntity<ConsultaDTO> salvar(@Valid @RequestBody ConsultaModel novoConsulta) {

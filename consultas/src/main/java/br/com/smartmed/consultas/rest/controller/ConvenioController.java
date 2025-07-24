@@ -14,11 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/convenio")
 public class ConvenioController {
-
     @Autowired
     private ConvenioService convenioService;
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ConvenioDTO> obterPorId(@PathVariable int id) {
         ConvenioDTO convenioDTO = convenioService.obterPorId(id);
         return ResponseEntity.status(HttpStatus.OK).body(convenioDTO);
@@ -30,13 +29,7 @@ public class ConvenioController {
         return ResponseEntity.ok(convenioDTOList);
     }
 
-    @GetMapping("/nome/{nome}")
-    public ResponseEntity<List<ConvenioDTO>> obterPorNome(@PathVariable String nome) {
-        List<ConvenioDTO> convenioDTOList = convenioService.obterPorNome(nome);
-        return ResponseEntity.ok(convenioDTOList);
-    }
-
-    @GetMapping("/cnpj/{cnpj}")
+    @GetMapping("/{cnpj}")
     public ResponseEntity<ConvenioDTO> obterPorCnpj(@PathVariable String cnpj) {
         ConvenioDTO convenioDTO = convenioService.obterPorCnpj(cnpj);
         return ResponseEntity.status(HttpStatus.OK).body(convenioDTO);

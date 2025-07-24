@@ -1,13 +1,11 @@
 package br.com.smartmed.consultas.model;
 
-import br.com.smartmed.consultas.rest.dto.EspecialidadeDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.modelmapper.ModelMapper;
 
 @Data
 @AllArgsConstructor
@@ -15,7 +13,6 @@ import org.modelmapper.ModelMapper;
 @Entity
 @Table(name = "especialidade")
 public class EspecialidadeModel {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -29,8 +26,9 @@ public class EspecialidadeModel {
     @Column(name = "descricao", length = 255, nullable = true)
     private String descricao;
 
-    public EspecialidadeDTO toDTO() {
-        ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(this, EspecialidadeDTO.class);
-    }
+//    memory leak
+//    public EspecialidadeDTO toDTO() {
+//        ModelMapper modelMapper = new ModelMapper();
+//        return modelMapper.map(this, EspecialidadeDTO.class);
+//    }
 }

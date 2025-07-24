@@ -14,11 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/especialidade")
 public class EspecialidadeController {
-
     @Autowired
     private EspecialidadeService especialidadeService;
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<EspecialidadeDTO> obterPorId(@PathVariable int id) {
         EspecialidadeDTO especialidadeDTO = especialidadeService.obterPorId(id);
         return ResponseEntity.status(HttpStatus.OK).body(especialidadeDTO);
@@ -30,7 +29,7 @@ public class EspecialidadeController {
         return ResponseEntity.ok(especialidadeDTOList);
     }
 
-    @GetMapping("/nome/{nome}")
+    @GetMapping("/{nome}")
     public ResponseEntity<Boolean> existeNome(@PathVariable String nome) {
         boolean existe = especialidadeService.existeNome(nome);
         return ResponseEntity.status(existe ? HttpStatus.OK : HttpStatus.NOT_FOUND).body(existe);

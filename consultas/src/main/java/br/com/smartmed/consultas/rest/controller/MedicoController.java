@@ -14,11 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/medico")
 public class MedicoController {
-
     @Autowired
     private MedicoService medicoService;
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<MedicoDTO> obterPorId(@PathVariable int id) {
         MedicoDTO medicoDTO = medicoService.obterPorId(id);
         return ResponseEntity.status(HttpStatus.OK).body(medicoDTO);
@@ -30,13 +29,13 @@ public class MedicoController {
         return ResponseEntity.ok(medicoDTOList);
     }
 
-    @GetMapping("/nome/{nome}")
+    @GetMapping("/{nome}")
     public ResponseEntity<List<MedicoDTO>> obterPorNome(@PathVariable String nome) {
         List<MedicoDTO> medicoDTOList = medicoService.obterPorNome(nome);
         return ResponseEntity.ok(medicoDTOList);
     }
 
-    @GetMapping("/crm/{crm}")
+    @GetMapping("/{crm}")
     public ResponseEntity<MedicoDTO> obterPorCrm(@PathVariable String crm) {
         MedicoDTO medicoDTO = medicoService.obterPorCrm(crm);
         return ResponseEntity.status(HttpStatus.OK).body(medicoDTO);
