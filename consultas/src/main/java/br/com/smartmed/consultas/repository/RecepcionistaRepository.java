@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface RecepcionistaRepository extends JpaRepository<RecepcionistaModel, Integer> {
 
-    List<RecepcionistaModel> findByNome(String pNome);
+    List<RecepcionistaModel> findByNomeContainingIgnoreCase(String pNome);
 
     Optional<RecepcionistaModel> findByCpf(String pCpf);
 

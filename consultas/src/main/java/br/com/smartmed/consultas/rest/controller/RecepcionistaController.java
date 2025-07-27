@@ -9,37 +9,47 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/recepcionista")
 public class RecepcionistaController {
     @Autowired
     private RecepcionistaService recepcionistaService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<RecepcionistaDTO> obterPorId(@PathVariable int id) {
-        RecepcionistaDTO recepcionistaDTO = recepcionistaService.obterPorId(id);
-        return ResponseEntity.status(HttpStatus.OK).body(recepcionistaDTO);
-    }
-
     @GetMapping()
-    public ResponseEntity<List<RecepcionistaDTO>> obterTodos() {
-        List<RecepcionistaDTO> recepcionistaDTOList = recepcionistaService.obterTodos();
-        return ResponseEntity.ok(recepcionistaDTOList);
-    }
+    public ResponseEntity<?> buscarRecepcionista(
+            @RequestParam(name = "id", required = false) Integer id,
+            @RequestParam(name = "nome", required = false) String nome,
+            @RequestParam(name = "cpf", required = false) String cpf) {
 
-    @GetMapping("/{nome}")
-    public ResponseEntity<List<RecepcionistaDTO>> obterPorNome(@PathVariable String nome) {
-        List<RecepcionistaDTO> recepcionistaDTOList = recepcionistaService.obterPorNome(nome);
-        return ResponseEntity.ok(recepcionistaDTOList);
+        if (id != null) return ResponseEntity.ok(recepcionistaService.obterPorId(id));
+        if (nome != null) return ResponseEntity.ok(recepcionistaService.obterPorNome(nome));
+        if (cpf != null) return ResponseEntity.ok(recepcionistaService.obterPorCpf(cpf));
+        return ResponseEntity.ok(recepcionistaService.obterTodos());
     }
-
-    @GetMapping("/{cpf}")
-    public ResponseEntity<RecepcionistaDTO> obterPorCpf(@PathVariable String cpf) {
-        RecepcionistaDTO recepcionistaDTO = recepcionistaService.obterPorCpf(cpf);
-        return ResponseEntity.status(HttpStatus.OK).body(recepcionistaDTO);
-    }
+//
+//    @GetMapping()
+//    public ResponseEntity<List<RecepcionistaDTO>> obterTodos() {
+//        List<RecepcionistaDTO> recepcionistaDTOList = recepcionistaService.obterTodos();
+//        return ResponseEntity.ok(recepcionistaDTOList);
+//    }
+//
+//    @GetMapping("/{id}")
+//    public ResponseEntity<RecepcionistaDTO> obterPorId(@PathVariable int id) {
+//        RecepcionistaDTO recepcionistaDTO = recepcionistaService.obterPorId(id);
+//        return ResponseEntity.status(HttpStatus.OK).body(recepcionistaDTO);
+//    }
+//
+//    @GetMapping("/{nome}")
+//    public ResponseEntity<List<RecepcionistaDTO>> obterPorNome(@PathVariable String nome) {
+//        List<RecepcionistaDTO> recepcionistaDTOList = recepcionistaService.obterPorNome(nome);
+//        return ResponseEntity.ok(recepcionistaDTOList);
+//    }
+//
+//    @GetMapping("/{cpf}")
+//    public ResponseEntity<RecepcionistaDTO> obterPorCpf(@PathVariable String cpf) {
+//        RecepcionistaDTO recepcionistaDTO = recepcionistaService.obterPorCpf(cpf);
+//        return ResponseEntity.status(HttpStatus.OK).body(recepcionistaDTO);
+//    }
 
     @PostMapping()
     public ResponseEntity<RecepcionistaDTO> salvar(@Valid @RequestBody RecepcionistaModel novoRecepcionista) {

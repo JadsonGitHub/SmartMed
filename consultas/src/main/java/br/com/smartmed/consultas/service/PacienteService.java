@@ -40,7 +40,7 @@ public class PacienteService {
 
     @Transactional(readOnly = true)
     public List<PacienteDTO> obterPorNome(String nome) {
-        List<PacienteModel> pacientes = pacienteRepository.findByNome(nome);
+        List<PacienteModel> pacientes = pacienteRepository.findByNomeContainingIgnoreCase(nome);
 //        return pacientes.stream()
 //                .map(paciente -> paciente.toDTO())
 //                .collect(Collectors.toList());

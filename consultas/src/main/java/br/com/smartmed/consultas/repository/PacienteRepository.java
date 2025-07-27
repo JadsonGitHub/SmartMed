@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface PacienteRepository extends JpaRepository<PacienteModel, Integer> {
 
-    List<PacienteModel> findByNome(String pNome);
+    List<PacienteModel> findByNomeContainingIgnoreCase(String pNome);
 
     Optional<PacienteModel> findByCpf(String pCpf);
 

@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface ConvenioRepository extends JpaRepository<ConvenioModel, Integer> {
 
-    List<ConvenioModel> findByNome(String pNome);
+    List<ConvenioModel> findByNomeContainingIgnoreCase(String pNome);
 
     Optional<ConvenioModel> findByCnpj(String pCnpj);
 

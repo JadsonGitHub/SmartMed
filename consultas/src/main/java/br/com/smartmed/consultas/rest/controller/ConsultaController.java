@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @RestController
 @RequestMapping("/consulta")
@@ -18,29 +17,42 @@ public class ConsultaController {
     @Autowired
     private ConsultaService consultaService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ConsultaDTO> obterPorId(@PathVariable int id) {
-        ConsultaDTO consultaDTO = consultaService.obterPorId(id);
-        return ResponseEntity.status(HttpStatus.OK).body(consultaDTO);
-    }
-
     @GetMapping()
-    public ResponseEntity<List<ConsultaDTO>> obterTodos() {
-        List<ConsultaDTO> consultaDTOList = consultaService.obterTodos();
-        return ResponseEntity.ok(consultaDTOList);
+    public ResponseEntity<?> buscarConsulta(
+            @RequestParam(name = "id", required = false) Integer id,
+            @RequestParam(name = "status", required = false) String status,
+            @RequestParam(name = "DataHoraConsulta", required = false) LocalDate DataHoraConsulta) {
+
+        if (id != null) return ResponseEntity.ok(consultaService.obterPorId(id));
+        if (status != null) return ResponseEntity.ok(consultaService.obterPorStatus(status));
+        if (DataHoraConsulta != null)
+            return ResponseEntity.ok(consultaService.obterPorDataHoraConsulta(DataHoraConsulta));
+        return ResponseEntity.ok(consultaService.obterTodos());
     }
 
-    @GetMapping("/{status}")
-    public ResponseEntity<List<ConsultaDTO>> obterPorStatus(@PathVariable String status) {
-        List<ConsultaDTO> consultaDTOList = consultaService.obterPorStatus(status);
-        return ResponseEntity.ok(consultaDTOList);
-    }
-
-    @GetMapping("/{datahora}")
-    public ResponseEntity<List<ConsultaDTO>> obterPorDataHoraConsulta(@PathVariable LocalDate DataHoraConsulta) {
-        List<ConsultaDTO> consultaDTOList = consultaService.obterPorDataHoraConsulta(DataHoraConsulta);
-        return ResponseEntity.ok(consultaDTOList);
-    }
+//    @GetMapping()
+//    public ResponseEntity<List<ConsultaDTO>> obterTodos() {
+//        List<ConsultaDTO> consultaDTOList = consultaService.obterTodos();
+//        return ResponseEntity.ok(consultaDTOList);
+//    }
+//
+//    @GetMapping("/{id}")
+//    public ResponseEntity<ConsultaDTO> obterPorId(@PathVariable int id) {
+//        ConsultaDTO consultaDTO = consultaService.obterPorId(id);
+//        return ResponseEntity.status(HttpStatus.OK).body(consultaDTO);
+//    }
+//
+//    @GetMapping("/{status}")
+//    public ResponseEntity<List<ConsultaDTO>> obterPorStatus(@PathVariable String status) {
+//        List<ConsultaDTO> consultaDTOList = consultaService.obterPorStatus(status);
+//        return ResponseEntity.ok(consultaDTOList);
+//    }
+//
+//    @GetMapping("/{datahora}")
+//    public ResponseEntity<List<ConsultaDTO>> obterPorDataHoraConsulta(@PathVariable LocalDate DataHoraConsulta) {
+//        List<ConsultaDTO> consultaDTOList = consultaService.obterPorDataHoraConsulta(DataHoraConsulta);
+//        return ResponseEntity.ok(consultaDTOList);
+//    }
 
     @PostMapping()
     public ResponseEntity<ConsultaDTO> salvar(@Valid @RequestBody ConsultaModel novoConsulta) {

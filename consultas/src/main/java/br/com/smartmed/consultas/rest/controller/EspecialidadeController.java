@@ -9,31 +9,39 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/especialidade")
 public class EspecialidadeController {
     @Autowired
     private EspecialidadeService especialidadeService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<EspecialidadeDTO> obterPorId(@PathVariable int id) {
-        EspecialidadeDTO especialidadeDTO = especialidadeService.obterPorId(id);
-        return ResponseEntity.status(HttpStatus.OK).body(especialidadeDTO);
-    }
-
     @GetMapping()
-    public ResponseEntity<List<EspecialidadeDTO>> obterTodos() {
-        List<EspecialidadeDTO> especialidadeDTOList = especialidadeService.obterTodos();
-        return ResponseEntity.ok(especialidadeDTOList);
+    public ResponseEntity<?> buscarEspecialidade(
+            @RequestParam(name = "id", required = false) Integer id,
+            @RequestParam(name = "nome", required = false) String nome) {
+
+        if (id != null) return ResponseEntity.ok(especialidadeService.obterPorId(id));
+        if (nome != null) return ResponseEntity.ok(especialidadeService.obterPorNome(nome));
+        return ResponseEntity.ok(especialidadeService.obterTodos());
     }
 
-    @GetMapping("/{nome}")
-    public ResponseEntity<Boolean> existeNome(@PathVariable String nome) {
-        boolean existe = especialidadeService.existeNome(nome);
-        return ResponseEntity.status(existe ? HttpStatus.OK : HttpStatus.NOT_FOUND).body(existe);
-    }
+//    @GetMapping()
+//    public ResponseEntity<List<EspecialidadeDTO>> obterTodos() {
+//        List<EspecialidadeDTO> especialidadeDTOList = especialidadeService.obterTodos();
+//        return ResponseEntity.ok(especialidadeDTOList);
+//    }
+//
+//    @GetMapping("/{id}")
+//    public ResponseEntity<EspecialidadeDTO> obterPorId(@PathVariable int id) {
+//        EspecialidadeDTO especialidadeDTO = especialidadeService.obterPorId(id);
+//        return ResponseEntity.status(HttpStatus.OK).body(especialidadeDTO);
+//    }
+//
+//    @GetMapping("/{nome}")
+//    public ResponseEntity<Boolean> obterPorNome(@PathVariable String nome) {
+//        boolean existe = especialidadeService.obterPorNome(nome);
+//        return ResponseEntity.status(existe ? HttpStatus.OK : HttpStatus.NOT_FOUND).body(existe);
+//    }
 
     @PostMapping()
     public ResponseEntity<EspecialidadeDTO> salvar(@Valid @RequestBody EspecialidadeModel novoEspecialidade) {

@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface MedicoRepository extends JpaRepository<MedicoModel, Integer> {
 
-    List<MedicoModel> findByNome(String pNome);
+    List<MedicoModel> findByNomeContainingIgnoreCase(String pNome);
 
     Optional<MedicoModel> findByCrm(String pCrm);
 

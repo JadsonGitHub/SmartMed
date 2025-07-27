@@ -9,37 +9,47 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/medico")
 public class MedicoController {
     @Autowired
     private MedicoService medicoService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<MedicoDTO> obterPorId(@PathVariable int id) {
-        MedicoDTO medicoDTO = medicoService.obterPorId(id);
-        return ResponseEntity.status(HttpStatus.OK).body(medicoDTO);
-    }
-
     @GetMapping()
-    public ResponseEntity<List<MedicoDTO>> obterTodos() {
-        List<MedicoDTO> medicoDTOList = medicoService.obterTodos();
-        return ResponseEntity.ok(medicoDTOList);
+    public ResponseEntity<?> buscarMedico(
+            @RequestParam(name = "id", required = false) Integer id,
+            @RequestParam(name = "nome", required = false) String nome,
+            @RequestParam(name = "crm", required = false) String crm) {
+
+        if (id != null) return ResponseEntity.ok(medicoService.obterPorId(id));
+        if (nome != null) return ResponseEntity.ok(medicoService.obterPorNome(nome));
+        if (crm != null) return ResponseEntity.ok(medicoService.obterPorCrm(crm));
+        return ResponseEntity.ok(medicoService.obterTodos());
     }
 
-    @GetMapping("/{nome}")
-    public ResponseEntity<List<MedicoDTO>> obterPorNome(@PathVariable String nome) {
-        List<MedicoDTO> medicoDTOList = medicoService.obterPorNome(nome);
-        return ResponseEntity.ok(medicoDTOList);
-    }
-
-    @GetMapping("/{crm}")
-    public ResponseEntity<MedicoDTO> obterPorCrm(@PathVariable String crm) {
-        MedicoDTO medicoDTO = medicoService.obterPorCrm(crm);
-        return ResponseEntity.status(HttpStatus.OK).body(medicoDTO);
-    }
+//    @GetMapping()
+//    public ResponseEntity<List<MedicoDTO>> obterTodos() {
+//        List<MedicoDTO> medicoDTOList = medicoService.obterTodos();
+//        return ResponseEntity.ok(medicoDTOList);
+//    }
+//    
+//    @GetMapping("/{id}")
+//    public ResponseEntity<MedicoDTO> obterPorId(@PathVariable int id) {
+//        MedicoDTO medicoDTO = medicoService.obterPorId(id);
+//        return ResponseEntity.status(HttpStatus.OK).body(medicoDTO);
+//    }
+//
+//    @GetMapping("/{nome}")
+//    public ResponseEntity<List<MedicoDTO>> obterPorNome(@PathVariable String nome) {
+//        List<MedicoDTO> medicoDTOList = medicoService.obterPorNome(nome);
+//        return ResponseEntity.ok(medicoDTOList);
+//    }
+//
+//    @GetMapping("/{crm}")
+//    public ResponseEntity<MedicoDTO> obterPorCrm(@PathVariable String crm) {
+//        MedicoDTO medicoDTO = medicoService.obterPorCrm(crm);
+//        return ResponseEntity.status(HttpStatus.OK).body(medicoDTO);
+//    }
 
     @PostMapping()
     public ResponseEntity<MedicoDTO> salvar(@Valid @RequestBody MedicoModel novoMedico) {

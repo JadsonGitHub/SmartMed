@@ -4,8 +4,10 @@ import br.com.smartmed.consultas.model.EspecialidadeModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface EspecialidadeRepository extends JpaRepository<EspecialidadeModel, Integer> {
 
-    boolean existsByNome(String nome);
+    List<EspecialidadeModel> findByNomeContainingIgnoreCase(String pNome);
 }

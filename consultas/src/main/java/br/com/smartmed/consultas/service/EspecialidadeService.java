@@ -35,8 +35,11 @@ public class EspecialidadeService {
     }
 
     @Transactional(readOnly = true)
-    public boolean existeNome(String cpf) {
-        return especialidadeRepository.existsByNome(cpf);
+    public List<EspecialidadeDTO> obterPorNome(String nome) {
+        List<EspecialidadeModel> especialidades = especialidadeRepository.findByNomeContainingIgnoreCase(nome);
+        return especialidades.stream()
+                .map(especialidade -> modelMapper.map(especialidade, EspecialidadeDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Transactional

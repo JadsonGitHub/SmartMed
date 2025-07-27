@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+<!--       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">-->
+<!--</beans>-->
+
+<configuration>
+    <!-- Define o padrão de log colorido para o console -->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%d{HH:mm:ss.SSS} [%highlight(%-5level)] %cyan([%thread]) %blue(%logger{36}) - %msg%n"/>
+    <appender name="STDOUT"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    <!-- Log nível DEBUG para seu pacote específico -->
+    <logger name="br.com.smartmed.consultas" level="DEBUG"/>
+    <!-- Configuração raiz, nível INFO e saída para console -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

@@ -36,7 +36,7 @@ public class MedicoService {
 
     @Transactional(readOnly = true)
     public List<MedicoDTO> obterPorNome(String nome) {
-        List<MedicoModel> medicos = medicoRepository.findByNome(nome);
+        List<MedicoModel> medicos = medicoRepository.findByNomeContainingIgnoreCase(nome);
         return medicos.stream()
                 .map(medico -> modelMapper.map(medico, MedicoDTO.class))
                 .collect(Collectors.toList());
