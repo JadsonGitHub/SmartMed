@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CNPJ;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -42,6 +45,10 @@ public class ConvenioModel {
 
     @Column(name = "ativo", nullable = false)
     private boolean ativo;
+
+    // relacao com as consultas
+    @OneToMany(mappedBy = "convenio")
+    private List<ConsultaModel> consultas = new ArrayList<>();
 
 //    memory leak
 //    public ConvenioDTO toDTO() {

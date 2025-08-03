@@ -4,10 +4,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,8 +29,12 @@ public class MedicoModel {
     @NotBlank(message = "O nome é obrigatório.")
     private String nome;
 
+    // adicao do padrao para validar o CRM de maneira mais precisa
+    // @Length(min = 8, max = 8, message = "O campo deve ter exatamente 8 dígitos. Ex: 13449-SP")
+    @Pattern(
+            regexp = "^\\d{4,6}-(AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO)$",
+            message = "O campo deve ter exatamente 8 dígitos. Ex: 13449-SP")
     @Column(name = "crm", length = 8, nullable = false, unique = true)
-    @Length(min = 8, max = 8, message = "O campo deve ter exatamente 8 dígitos. Ex: 13449-SP")
     private String crm;
 
     @Column(name = "telefone", length = 11, nullable = false)
@@ -47,6 +55,14 @@ public class MedicoModel {
 
     @Column(name = "especialidadeID", nullable = false)
     private int especialidadeID;
+
+    @ManyToOne
+    @JoinColumn(name = "especialidadeID", insertable = false, updatable = false)
+    private EspecialidadeModel especialidade;
+
+    // relacao com as consultas
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ConsultaModel> consultas = new ArrayList<>();
 
 //    memory leak
 //    public MedicoDTO toDTO() {

@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,6 +21,10 @@ public class FormaPagamentoModel {
 
     @Column(name = "descricao", length = 64, nullable = true)
     private String descricao;
+
+    // relacao com as consultas
+    @OneToMany(mappedBy = "formaPagamento")
+    private List<ConsultaModel> consultas = new ArrayList<>();
 
 //    memory leak
 //    public FormaPagamentoDTO toDTO() {

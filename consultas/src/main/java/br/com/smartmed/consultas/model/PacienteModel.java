@@ -11,6 +11,8 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -44,6 +46,10 @@ public class PacienteModel {
     @Column(name = "email", length = 64, nullable = true)
     @Email(message = "E-mail inválido.")
     private String email;
+
+    // relacionamento com as consultas
+    @OneToMany(mappedBy = "paciente")
+    private List<ConsultaModel> consultas = new ArrayList<>();
 
 //    memory leak
 //    public PacienteDTO toDTO() {

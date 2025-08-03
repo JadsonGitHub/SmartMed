@@ -47,6 +47,26 @@ public class ConsultaModel {
     @Column(name = "recepcionistaID", nullable = false)
     private int recepcionistaID;
 
+    @ManyToOne
+    @JoinColumn(name = "pacienteID", insertable = false, updatable = false)
+    private PacienteModel paciente;
+
+    @ManyToOne
+    @JoinColumn(name = "medicoID", insertable = false, updatable = false)
+    private MedicoModel medico;
+
+    @ManyToOne
+    @JoinColumn(name = "recepcionistaID", insertable = false, updatable = false)
+    private RecepcionistaModel recepcionista;
+
+    @ManyToOne
+    @JoinColumn(name = "convenioID", insertable = false, updatable = false)
+    private ConvenioModel convenio;
+
+    @ManyToOne
+    @JoinColumn(name = "formaPagamentoID", insertable = false, updatable = false)
+    private FormaPagamentoModel formaPagamento;
+
 //    memory leak
 //    public ConsultaDTO toDTO() {
 //        ModelMapper modelMapper = new ModelMapper();

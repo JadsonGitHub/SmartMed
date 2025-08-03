@@ -7,6 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,6 +28,10 @@ public class EspecialidadeModel {
 
     @Column(name = "descricao", length = 255, nullable = true)
     private String descricao;
+
+    // relacao com os medicos
+    @OneToMany(mappedBy = "especialidade")
+    private List<MedicoModel> medicos = new ArrayList<>();
 
 //    memory leak
 //    public EspecialidadeDTO toDTO() {
