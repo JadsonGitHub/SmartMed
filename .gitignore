@@ -184,5 +184,10 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+### VS Code ###
+.vscode/
+
+### GitHub ###
+.github/
 
 # End of https://www.toptal.com/developers/gitignore/api/java,maven,intellij,windows

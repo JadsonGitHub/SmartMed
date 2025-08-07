@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @RestController
 @RequestMapping("/relatorios")
@@ -19,8 +18,18 @@ public class FaturamentoController {
     @Autowired
     private FaturamentoService faturamentoService;
 
+//    @GetMapping("/faturamento")
+//    public ResponseEntity<List<FaturamentoDTO>> faturamento(
+//            @RequestParam(name = "dataInicio", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+//            @RequestParam(name = "dataFim", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) {
+//
+//        return (dataFim != null)
+//                ? ResponseEntity.ok(faturamentoService.obterFaturamento(dataInicio, dataFim))
+//                : ResponseEntity.ok(faturamentoService.obterFaturamento(dataInicio, LocalDate.now()));
+//    }
+
     @GetMapping("/faturamento")
-    public ResponseEntity<List<FaturamentoDTO>> faturamento(
+    public ResponseEntity<FaturamentoDTO> faturamento(
             @RequestParam(name = "dataInicio", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
             @RequestParam(name = "dataFim", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) {
 
