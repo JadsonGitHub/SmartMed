@@ -45,7 +45,7 @@ public class ConsultaService {
 
     @Transactional(readOnly = true)
     public List<ConsultaDTO> obterPorPacienteID(int PacienteID) {
-        List<ConsultaModel> consultas = consultaRepository.findByPacienteID(PacienteID);
+        List<ConsultaModel> consultas = consultaRepository.findByPacienteId(PacienteID);
         return consultas.stream()
                 .map(consulta -> modelMapper.map(consulta, ConsultaDTO.class))
                 .collect(Collectors.toList());
@@ -53,7 +53,7 @@ public class ConsultaService {
 
     @Transactional(readOnly = true)
     public List<ConsultaDTO> obterPorMedicoID(int MedicoID) {
-        List<ConsultaModel> consultas = consultaRepository.findByMedicoID(MedicoID);
+        List<ConsultaModel> consultas = consultaRepository.findByMedicoId(MedicoID);
         return consultas.stream()
                 .map(consulta -> modelMapper.map(consulta, ConsultaDTO.class))
                 .collect(Collectors.toList());
@@ -61,7 +61,7 @@ public class ConsultaService {
 
     @Transactional(readOnly = true)
     public List<ConsultaDTO> obterPorConvenioID(int ConvenioID) {
-        List<ConsultaModel> consultas = consultaRepository.findByConvenioID(ConvenioID);
+        List<ConsultaModel> consultas = consultaRepository.findByConvenioId(ConvenioID);
         return consultas.stream()
                 .map(consulta -> modelMapper.map(consulta, ConsultaDTO.class))
                 .collect(Collectors.toList());
@@ -77,7 +77,7 @@ public class ConsultaService {
 
     @Transactional(readOnly = true)
     public List<ConsultaDTO> obterPorRecepcionistaID(int RecepcionistaID) {
-        List<ConsultaModel> consultas = consultaRepository.findByRecepcionistaID(RecepcionistaID);
+        List<ConsultaModel> consultas = consultaRepository.findByRecepcionistaId(RecepcionistaID);
         return consultas.stream()
                 .map(consulta -> modelMapper.map(consulta, ConsultaDTO.class))
                 .collect(Collectors.toList());

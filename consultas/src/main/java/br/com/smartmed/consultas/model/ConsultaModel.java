@@ -32,20 +32,20 @@ public class ConsultaModel {
     @Column(name = "observacoes", length = 1024, nullable = true)
     private String observacoes;
 
-    @Column(name = "pacienteID", nullable = false)
-    private int pacienteID;
-
-    @Column(name = "medicoID", nullable = false)
-    private int medicoID;
-
-    @Column(name = "formaPagamentoID", nullable = true)
-    private int formaPagamentoID;
-
-    @Column(name = "convenioID", nullable = true)
-    private int convenioID;
-
-    @Column(name = "recepcionistaID", nullable = false)
-    private int recepcionistaID;
+//    @Column(name = "pacienteID", nullable = false)
+//    private int pacienteID;
+//
+//    @Column(name = "medicoID", nullable = false)
+//    private int medicoID;
+//
+//    @Column(name = "formaPagamentoID", nullable = true)
+//    private int formaPagamentoID;
+//
+//    @Column(name = "convenioID", nullable = true)
+//    private Integer convenioID;
+//
+//    @Column(name = "recepcionistaID", nullable = false)
+//    private int recepcionistaID;
 
     @ManyToOne
     @JoinColumn(name = "pacienteID", insertable = false, updatable = false)

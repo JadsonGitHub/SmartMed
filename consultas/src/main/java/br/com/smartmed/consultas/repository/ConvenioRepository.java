@@ -17,8 +17,4 @@ public interface ConvenioRepository extends JpaRepository<ConvenioModel, Integer
     List<ConvenioModel> findByAtivo(Boolean pAtivo);
 
     boolean existsByCnpj(String cnpj);
-
-    boolean existsByTelefone(String telefone);
-
-    boolean existsByEmail(String email);
 }

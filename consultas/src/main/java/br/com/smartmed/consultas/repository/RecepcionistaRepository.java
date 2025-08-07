@@ -17,8 +17,4 @@ public interface RecepcionistaRepository extends JpaRepository<RecepcionistaMode
     List<RecepcionistaModel> findByAtivo(Boolean pAtivo);
 
     boolean existsByCpf(String cpf);
-
-    boolean existsByTelefone(String telefone);
-
-    boolean existsByEmail(String email);
 }

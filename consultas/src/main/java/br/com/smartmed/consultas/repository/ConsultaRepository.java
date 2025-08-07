@@ -12,27 +12,13 @@ public interface ConsultaRepository extends JpaRepository<ConsultaModel, Integer
 
     List<ConsultaModel> findByDataHoraConsulta(LocalDate pDataHoraConsulta);
 
-    List<ConsultaModel> findByPacienteID(int pPacienteID);
+    List<ConsultaModel> findByPacienteId(int pPacienteID);
 
-    List<ConsultaModel> findByMedicoID(int pMedicoID);
+    List<ConsultaModel> findByMedicoId(int pMedicoID);
 
-    List<ConsultaModel> findByConvenioID(int pConvenioID);
+    List<ConsultaModel> findByConvenioId(int pConvenioID);
 
-    List<ConsultaModel> findByRecepcionistaID(int pRecepcionistaID);
+    List<ConsultaModel> findByRecepcionistaId(int pRecepcionistaID);
 
     List<ConsultaModel> findByStatus(String pStatus);
-
-    boolean existsByDataHoraConsulta(LocalDate dataHoraConsulta);
-
-    boolean existsByStatus(String status);
-
-    boolean existsByPacienteID(int pacienteID);
-
-    boolean existsByMedicoID(int medicoID);
-
-    boolean existsByFormaPagamentoID(int formaPagamentoID);
-
-    boolean existsByConvenioID(int convenioID);
-
-    boolean existsByRecepcionistaID(int recepcionistaID);
 }

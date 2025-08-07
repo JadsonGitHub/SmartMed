@@ -53,15 +53,15 @@ public class MedicoModel {
     @Column(name = "ativo", nullable = false)
     private boolean ativo;
 
-    @Column(name = "especialidadeID", nullable = false)
-    private int especialidadeID;
+//    @Column(name = "especialidadeID", nullable = false)
+//    private int especialidadeID;
 
     @ManyToOne
     @JoinColumn(name = "especialidadeID", insertable = false, updatable = false)
     private EspecialidadeModel especialidade;
 
     // relacao com as consultas
-    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "medico")
     private List<ConsultaModel> consultas = new ArrayList<>();
 
 //    memory leak
