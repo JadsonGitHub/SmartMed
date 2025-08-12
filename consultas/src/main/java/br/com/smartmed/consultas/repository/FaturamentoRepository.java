@@ -7,5 +7,5 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface FaturamentoRepository extends JpaRepository<ConsultaModel, Integer> {
-    List<ConsultaModel> findByDataHoraConsultaBetweenAndStatus(LocalDate pDataHoraConsultaInicio, LocalDate pDataHoraConsultaFim, String status);
+    List<ConsultaModel> findByDataHoraConsultaBetweenAndStatusIgnoreCase(LocalDate pDataHoraConsultaInicio, LocalDate pDataHoraConsultaFim, String status);
 }

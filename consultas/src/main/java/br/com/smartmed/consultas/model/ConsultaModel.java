@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@ToString(exclude = {"paciente", "medico", "recepcionista", "convenio", "formaPagamento"})
 @Table(name = "consulta")
 public class ConsultaModel {
     @Id
@@ -38,33 +40,33 @@ public class ConsultaModel {
 //    @Column(name = "medicoID", nullable = false)
 //    private int medicoID;
 //
-//    @Column(name = "formaPagamentoID", nullable = true)
-//    private int formaPagamentoID;
+//    @Column(name = "recepcionistaID", nullable = false)
+//    private int recepcionistaID;
 //
 //    @Column(name = "convenioID", nullable = true)
 //    private Integer convenioID;
 //
-//    @Column(name = "recepcionistaID", nullable = false)
-//    private int recepcionistaID;
+//    @Column(name = "formaPagamentoID", nullable = true)
+//    private int formaPagamentoID;
 
     @ManyToOne
-    @JoinColumn(name = "pacienteID", insertable = false, updatable = false)
+    @JoinColumn(name = "pacienteID", insertable = false, updatable = false, nullable = false)
     private PacienteModel paciente;
 
     @ManyToOne
-    @JoinColumn(name = "medicoID", insertable = false, updatable = false)
+    @JoinColumn(name = "medicoID", insertable = false, updatable = false, nullable = false)
     private MedicoModel medico;
 
     @ManyToOne
-    @JoinColumn(name = "recepcionistaID", insertable = false, updatable = false)
+    @JoinColumn(name = "recepcionistaID", insertable = false, updatable = false, nullable = false)
     private RecepcionistaModel recepcionista;
 
     @ManyToOne
-    @JoinColumn(name = "convenioID", insertable = false, updatable = false)
+    @JoinColumn(name = "convenioID", insertable = false, updatable = false, nullable = true)
     private ConvenioModel convenio;
 
     @ManyToOne
-    @JoinColumn(name = "formaPagamentoID", insertable = false, updatable = false)
+    @JoinColumn(name = "formaPagamentoID", insertable = false, updatable = false, nullable = true)
     private FormaPagamentoModel formaPagamento;
 
 //    memory leak

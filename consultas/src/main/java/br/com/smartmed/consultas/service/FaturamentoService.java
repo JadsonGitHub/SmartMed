@@ -23,53 +23,35 @@ public class FaturamentoService {
 
     @Transactional(readOnly = true)
     public FaturamentoDTO obterFaturamento(LocalDate inicio, LocalDate fim) {
-        List<ConsultaModel> faturamentos = faturamentoRepository.findByDataHoraConsultaBetweenAndStatus(inicio, fim, "REALIZADA");
 
-        float totalGeral = 0f;
-        Map<String, Float> porFormaPagamento = new HashMap<>();
-        Map<String, Float> porConvenio = new HashMap<>();
+        List<ConsultaModel> faturamentos = faturamentoRepository
+                .findByDataHoraConsultaBetweenAndStatusIgnoreCase(inicio, fim, "Realizada");
+
+        float totalGeral = 0.00f;
+
+        Map<String, Float> faturamentoFormaPagamento = new HashMap<>();
+        Map<String, Float> faturamentoConvenio = new HashMap<>();
+        Map<String, LocalDate> periodo = new HashMap<>();
+
+        periodo.put("DE", inicio);
+        periodo.put("ATÉ", fim);
 
         for (ConsultaModel faturamento : faturamentos) {
-            float valor = faturamento.getValor();
-            totalGeral += valor;
+            totalGeral += faturamento.getValor();
 
-            porFormaPagamento.merge(faturamento.getFormaPagamento().getDescricao(), valor, Float::sum);
+            if (faturamento.getFormaPagamento() != null)
+                faturamentoFormaPagamento.merge(faturamento.getFormaPagamento().getDescricao(), faturamento.getValor(), Float::sum);
 
             if (faturamento.getConvenio() != null)
-                porConvenio.merge(faturamento.getConvenio().getNome(), valor, Float::sum);
+                faturamentoConvenio.merge(faturamento.getConvenio().getNome(), faturamento.getValor(), Float::sum);
         }
 
-//        List<FaturamentoDTO.porFormaPagamento> listaFormaPagamentos = porFormaPagamento.entrySet().stream()
-//                .map(entry -> {
-//                    FaturamentoDTO.porFormaPagamento dto = new FaturamentoDTO.porFormaPagamento();
-//                    dto.setFormaPagamento(entry.getKey());
-//                    dto.setValor(entry.getValue());
-//                    return dto;
-//                })
-//                .toList();
-//
-//        List<FaturamentoDTO.porConvenio> listaConvenios = porConvenio.entrySet().stream()
-//                .map(entry -> {
-//                    FaturamentoDTO.porConvenio dto = new FaturamentoDTO.porConvenio();
-//                    dto.setConvenio(entry.getKey());
-//                    dto.setValor(entry.getValue());
-//                    return dto;
-//                })
-//                .toList();
+        FaturamentoDTO relatorioFaturamento = new FaturamentoDTO();
+        relatorioFaturamento.setPeriodo(periodo);
+        relatorioFaturamento.setTotalGeral(totalGeral);
+        relatorioFaturamento.setFaturamentoConvenio(faturamentoConvenio);
+        relatorioFaturamento.setFaturamentoFormaPagamento(faturamentoFormaPagamento);
 
-        List<FaturamentoDTO.porFormaPagamento> listaFormaPagamentos = porFormaPagamento.entrySet().stream()
-                .map(entry -> FaturamentoDTO.porFormaPagamento.from(entry.getKey(), entry.getValue()))
-                .toList();
-
-        List<FaturamentoDTO.porConvenio> listaConvenios = porConvenio.entrySet().stream()
-                .map(entry -> FaturamentoDTO.porConvenio.from(entry.getKey(), entry.getValue()))
-                .toList();
-
-        FaturamentoDTO faturamentoDTO = new FaturamentoDTO();
-        faturamentoDTO.setTotalGeral(totalGeral);
-        faturamentoDTO.setPorFormaPagamentos(listaFormaPagamentos);
-        faturamentoDTO.setPorConvenios(listaConvenios);
-
-        return faturamentoDTO;
+        return modelMapper.map(relatorioFaturamento, FaturamentoDTO.class);
     }
 }

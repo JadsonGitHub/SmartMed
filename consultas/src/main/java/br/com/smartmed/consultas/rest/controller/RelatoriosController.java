@@ -14,27 +14,16 @@ import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/relatorios")
-public class FaturamentoController {
+public class RelatoriosController {
     @Autowired
     private FaturamentoService faturamentoService;
 
-//    @GetMapping("/faturamento")
-//    public ResponseEntity<List<FaturamentoDTO>> faturamento(
-//            @RequestParam(name = "dataInicio", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
-//            @RequestParam(name = "dataFim", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) {
-//
-//        return (dataFim != null)
-//                ? ResponseEntity.ok(faturamentoService.obterFaturamento(dataInicio, dataFim))
-//                : ResponseEntity.ok(faturamentoService.obterFaturamento(dataInicio, LocalDate.now()));
-//    }
-
     @GetMapping("/faturamento")
     public ResponseEntity<FaturamentoDTO> faturamento(
-            @RequestParam(name = "dataInicio", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+            @RequestParam(name = "dataInicio", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
             @RequestParam(name = "dataFim", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) {
-
-        return (dataFim != null)
+        return (dataFim != null && dataInicio != null)
                 ? ResponseEntity.ok(faturamentoService.obterFaturamento(dataInicio, dataFim))
-                : ResponseEntity.ok(faturamentoService.obterFaturamento(dataInicio, LocalDate.now()));
+                : ResponseEntity.ok(faturamentoService.obterFaturamento(LocalDate.of(2025, 01, 01), LocalDate.now()));
     }
 }

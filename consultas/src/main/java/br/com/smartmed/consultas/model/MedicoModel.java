@@ -29,12 +29,11 @@ public class MedicoModel {
     @NotBlank(message = "O nome é obrigatório.")
     private String nome;
 
-    // adicao do padrao para validar o CRM de maneira mais precisa
     // @Length(min = 8, max = 8, message = "O campo deve ter exatamente 8 dígitos. Ex: 13449-SP")
-    @Pattern(
-            regexp = "^\\d{4,6}-(AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO)$",
-            message = "O campo deve ter exatamente 8 dígitos. Ex: 13449-SP")
-    @Column(name = "crm", length = 8, nullable = false, unique = true)
+    @Pattern(  // \d{4,6}
+            regexp = "^[0-9]{4,6}-(AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO)$",
+            message = "O campo deve ter de 4 a 6 números, seguidos do Estado (separado por hífen). Ex: 13449-SP")
+    @Column(name = "crm", nullable = false, unique = true)  // length = 8,
     private String crm;
 
     @Column(name = "telefone", length = 11, nullable = false)

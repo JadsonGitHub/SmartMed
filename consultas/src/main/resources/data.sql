@@ -1,612 +1,286 @@
--- =============================
--- FORMAS DE PAGAMENTO (5)
--- =============================
-INSERT INTO forma_pagamento (id, descricao)
-VALUES (1, 'Dinheiro');
-INSERT INTO forma_pagamento (id, descricao)
-VALUES (2, 'Cartão de Débito');
-INSERT INTO forma_pagamento (id, descricao)
-VALUES (3, 'Cartão de Crédito');
-INSERT INTO forma_pagamento (id, descricao)
-VALUES (4, 'PIX');
-INSERT INTO forma_pagamento (id, descricao)
-VALUES (5, 'Convênio Médico');
-
--- =============================
--- ESPECIALIDADES MÉDICAS (12)
--- =============================
-INSERT INTO especialidade (id, nome, descricao)
-VALUES (1, 'Cardiologia',
-        'Especialidade médica que se ocupa do diagnóstico e tratamento das doenças que acometem o coração');
-INSERT INTO especialidade (id, nome, descricao)
-VALUES (2, 'Dermatologia',
-        'Especialidade médica que se ocupa do diagnóstico, tratamento e prevenção de doenças da pele');
-INSERT INTO especialidade (id, nome, descricao)
-VALUES (3, 'Ginecologia', 'Especialidade médica que trata da saúde do aparelho reprodutor feminino');
-INSERT INTO especialidade (id, nome, descricao)
-VALUES (4, 'Neurologia', 'Especialidade médica que trata dos distúrbios estruturais do sistema nervoso');
-INSERT INTO especialidade (id, nome, descricao)
-VALUES (5, 'Ortopedia',
-        'Especialidade médica que cuida do aparelho locomotor: ossos, músculos, ligamentos e articulações');
-INSERT INTO especialidade (id, nome, descricao)
-VALUES (6, 'Pediatria', 'Especialidade médica dedicada à assistência à criança e ao adolescente');
-INSERT INTO especialidade (id, nome, descricao)
-VALUES (7, 'Psiquiatria',
-        'Especialidade médica que lida com a prevenção, diagnóstico e tratamento de transtornos mentais');
-INSERT INTO especialidade (id, nome, descricao)
-VALUES (8, 'Urologia',
-        'Especialidade médica que trata do trato urinário de homens e mulheres e do sistema reprodutor masculino');
-INSERT INTO especialidade (id, nome, descricao)
-VALUES (9, 'Oftalmologia', 'Especialidade médica que investiga e trata as doenças relacionadas aos olhos');
-INSERT INTO especialidade (id, nome, descricao)
-VALUES (10, 'Otorrinolaringologia',
-        'Especialidade médica que cuida dos ouvidos, nariz, seios paranasais, faringe e laringe');
-INSERT INTO especialidade (id, nome, descricao)
-VALUES (11, 'Endocrinologia', 'Especialidade médica que cuida dos transtornos das glândulas endócrinas');
-INSERT INTO especialidade (id, nome, descricao)
-VALUES (12, 'Clínica Geral',
-        'Especialidade médica que proporciona atenção contínua e abrangente ao indivíduo e família');
-
--- =============================
--- CONVÊNIOS (10)
--- =============================
-INSERT INTO convenio (nome, cnpj, telefone, email, ativo)
-VALUES ('Unimed', '12345678000195', '11987654321', 'contato@unimed.com.br', TRUE);
-INSERT INTO convenio (nome, cnpj, telefone, email, ativo)
-VALUES ('Bradesco Saúde', '23456789000186', '11876543210', 'atendimento@bradescosaude.com.br', TRUE);
-INSERT INTO convenio (nome, cnpj, telefone, email, ativo)
-VALUES ('SulAmérica Saúde', '34567890000177', '11765432109', 'sac@sulamerica.com.br', TRUE);
-INSERT INTO convenio (nome, cnpj, telefone, email, ativo)
-VALUES ('Amil', '45678901000168', '11654321098', 'central@amil.com.br', TRUE);
-INSERT INTO convenio (nome, cnpj, telefone, email, ativo)
-VALUES ('NotreDame Intermédica', '56789012000159', '11543210987', 'relacionamento@gndi.com.br', FALSE);
-INSERT INTO convenio (nome, cnpj, telefone, email, ativo)
-VALUES ('Hapvida', '67890123000140', '11432109876', 'atendimento@hapvida.com.br', TRUE);
-INSERT INTO convenio (nome, cnpj, telefone, email, ativo)
-VALUES ('Golden Cross', '78901234000131', '11321098765', 'sac@goldencross.com.br', TRUE);
-INSERT INTO convenio (nome, cnpj, telefone, email, ativo)
-VALUES ('Prevent Senior', '89012345000122', '11210987654', 'central@preventsenior.com.br', FALSE);
-INSERT INTO convenio (nome, cnpj, telefone, email, ativo)
-VALUES ('São Cristóvão Saúde', '90123456000113', '11109876543', 'relacionamento@saocristovao.com.br', TRUE);
-INSERT INTO convenio (nome, cnpj, telefone, email, ativo)
-VALUES ('Cassi', '01234567000104', '11098765432', 'ouvidoria@cassi.com.br', TRUE);
-
--- =============================
--- MÉDICOS (15)
--- =============================
-INSERT INTO medico (nome, crm, telefone, email, valorConsultaReferencia, ativo, especialidadeid)
-VALUES ('Dr. Carlos Silva', '12345-SP', '11987654321', 'carlos.silva@email.com', 250.00, TRUE, 1);
-INSERT INTO medico (nome, crm, telefone, email, valorConsultaReferencia, ativo, especialidadeid)
-VALUES ('Dra. Ana Santos', '23456-RJ', '21876543210', 'ana.santos@email.com', 200.00, TRUE, 2);
-INSERT INTO medico (nome, crm, telefone, email, valorConsultaReferencia, ativo, especialidadeid)
-VALUES ('Dra. Maria Oliveira', '34567-MG', '31765432109', 'maria.oliveira@email.com', 180.00, TRUE, 3);
-INSERT INTO medico (nome, crm, telefone, email, valorConsultaReferencia, ativo, especialidadeid)
-VALUES ('Dr. João Pereira', '45678-RS', '51654321098', 'joao.pereira@email.com', 300.00, TRUE, 4);
-INSERT INTO medico (nome, crm, telefone, email, valorConsultaReferencia, ativo, especialidadeid)
-VALUES ('Dr. Pedro Costa', '56789-PR', '41543210987', 'pedro.costa@email.com', 220.00, TRUE, 5);
-INSERT INTO medico (nome, crm, telefone, email, valorConsultaReferencia, ativo, especialidadeid)
-VALUES ('Dra. Julia Lima', '67890-SC', '47432109876', 'julia.lima@email.com', 160.00, TRUE, 6);
-INSERT INTO medico (nome, crm, telefone, email, valorConsultaReferencia, ativo, especialidadeid)
-VALUES ('Dr. Rafael Souza', '78901-BA', '71321098765', 'rafael.souza@email.com', 280.00, TRUE, 7);
-INSERT INTO medico (nome, crm, telefone, email, valorConsultaReferencia, ativo, especialidadeid)
-VALUES ('Dr. Lucas Alves', '89012-PE', '81210987654', 'lucas.alves@email.com', 240.00, TRUE, 8);
-INSERT INTO medico (nome, crm, telefone, email, valorConsultaReferencia, ativo, especialidadeid)
-VALUES ('Dra. Fernanda Rocha', '90123-GO', '62109876543', 'fernanda.rocha@email.com', 190.00, TRUE, 9);
-INSERT INTO medico (nome, crm, telefone, email, valorConsultaReferencia, ativo, especialidadeid)
-VALUES ('Dr. Ricardo Dias', '01234-DF', '61098765432', 'ricardo.dias@email.com', 210.00, TRUE, 10);
-INSERT INTO medico (nome, crm, telefone, email, valorConsultaReferencia, ativo, especialidadeid)
-VALUES ('Dra. Camila Martins', '11111-CE', '85987654321', 'camila.martins@email.com', 200.00, TRUE, 11);
-INSERT INTO medico (nome, crm, telefone, email, valorConsultaReferencia, ativo, especialidadeid)
-VALUES ('Dr. Bruno Ferreira', '22222-ES', '27876543210', 'bruno.ferreira@email.com', 150.00, TRUE, 12);
-INSERT INTO medico (nome, crm, telefone, email, valorConsultaReferencia, ativo, especialidadeid)
-VALUES ('Dra. Leticia Gomes', '33333-SP', '11765432100', 'leticia.gomes@email.com', 220.00, FALSE, 1);
-INSERT INTO medico (nome, crm, telefone, email, valorConsultaReferencia, ativo, especialidadeid)
-VALUES ('Dr. Gabriel Ribeiro', '44444-RJ', '21654321000', 'gabriel.ribeiro@email.com', 270.00, TRUE, 4);
-INSERT INTO medico (nome, crm, telefone, email, valorConsultaReferencia, ativo, especialidadeid)
-VALUES ('Dra. Beatriz Nunes', '55555-MG', '31543210000', 'beatriz.nunes@email.com', 180.00, TRUE, 6);
-
--- =============================
--- RECEPCIONISTAS (10)
--- =============================
-INSERT INTO recepcionista (nome, cpf, dataNascimento, dataAdmissao, dataDemissao, telefone, email, ativo)
-VALUES ('Amanda Silva', '12345678901', '1995-03-15', '2022-01-10', NULL, '11987654321', 'amanda.silva@smartmed.com.br',
-        TRUE);
-INSERT INTO recepcionista (nome, cpf, dataNascimento, dataAdmissao, dataDemissao, telefone, email, ativo)
-VALUES ('Carla Santos', '23456789012', '1988-07-22', '2021-05-20', NULL, '11876543210', 'carla.santos@smartmed.com.br',
-        TRUE);
-INSERT INTO recepcionista (nome, cpf, dataNascimento, dataAdmissao, dataDemissao, telefone, email, ativo)
-VALUES ('Fernanda Costa', '34567890123', '1992-11-08', '2023-02-14', NULL, '11765432109',
-        'fernanda.costa@smartmed.com.br', TRUE);
-INSERT INTO recepcionista (nome, cpf, dataNascimento, dataAdmissao, dataDemissao, telefone, email, ativo)
-VALUES ('Juliana Oliveira', '45678901234', '1990-01-30', '2020-08-05', '2024-06-15', '11654321098',
-        'juliana.oliveira@smartmed.com.br', FALSE);
-INSERT INTO recepcionista (nome, cpf, dataNascimento, dataAdmissao, dataDemissao, telefone, email, ativo)
-VALUES ('Patrícia Lima', '56789012345', '1987-09-12', '2022-03-18', NULL, '11543210987',
-        'patricia.lima@smartmed.com.br', TRUE);
-INSERT INTO recepcionista (nome, cpf, dataNascimento, dataAdmissao, dataDemissao, telefone, email, ativo)
-VALUES ('Roberta Souza', '67890123456', '1994-05-25', '2023-07-01', NULL, '11432109876',
-        'roberta.souza@smartmed.com.br', TRUE);
-INSERT INTO recepcionista (nome, cpf, dataNascimento, dataAdmissao, dataDemissao, telefone, email, ativo)
-VALUES ('Vanessa Pereira', '78901234567', '1991-12-03', '2021-11-22', '2024-01-10', '11321098765',
-        'vanessa.pereira@smartmed.com.br', FALSE);
-INSERT INTO recepcionista (nome, cpf, dataNascimento, dataAdmissao, dataDemissao, telefone, email, ativo)
-VALUES ('Tatiane Alves', '89012345678', '1989-04-17', '2022-09-30', NULL, '11210987654',
-        'tatiane.alves@smartmed.com.br', TRUE);
-INSERT INTO recepcionista (nome, cpf, dataNascimento, dataAdmissao, dataDemissao, telefone, email, ativo)
-VALUES ('Cristina Rocha', '90123456789', '1993-08-14', '2023-04-12', NULL, '11109876543',
-        'cristina.rocha@smartmed.com.br', TRUE);
-INSERT INTO recepcionista (nome, cpf, dataNascimento, dataAdmissao, dataDemissao, telefone, email, ativo)
-VALUES ('Mônica Dias', '01234567890', '1986-06-28', '2020-12-07', NULL, '11098765432', 'monica.dias@smartmed.com.br',
-        TRUE);
-
--- =============================
--- PACIENTES (60)
--- =============================
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Ana Silva', '12345678901', '1985-03-15', '11987654321', 'ana.silva@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Carlos Santos', '23456789012', '1990-07-22', '11876543210', 'carlos.santos@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Maria Oliveira', '34567890123', '1978-11-08', '11765432109', 'maria.oliveira@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('João Pereira', '45678901234', '1995-01-30', '11654321098', 'joao.pereira@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Fernanda Costa', '56789012345', '1987-09-12', '11543210987', 'fernanda.costa@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Ricardo Lima', '67890123456', '1992-05-25', '11432109876', 'ricardo.lima@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Juliana Souza', '78901234567', '1980-12-03', '11321098765', 'juliana.souza@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Pedro Alves', '89012345678', '1975-04-17', '11210987654', 'pedro.alves@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Camila Rocha', '90123456789', '1993-08-14', '11109876543', 'camila.rocha@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Lucas Dias', '01234567890', '1988-06-28', '11098765432', 'lucas.dias@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Amanda Ferreira', '11234567890', '1991-02-10', '21987654321', 'amanda.ferreira@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Bruno Gomes', '21234567890', '1984-09-18', '21876543210', 'bruno.gomes@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Leticia Martins', '31234567890', '1996-12-05', '21765432109', 'leticia.martins@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Rafael Ribeiro', '41234567890', '1982-03-22', '21654321098', 'rafael.ribeiro@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Beatriz Nunes', '51234567890', '1989-10-11', '21543210987', 'beatriz.nunes@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Gabriel Cardoso', '61234567890', '1977-07-29', '21432109876', 'gabriel.cardoso@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Roberta Mendes', '71234567890', '1994-01-16', '21321098765', 'roberta.mendes@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Diego Torres', '81234567890', '1986-05-04', '21210987654', 'diego.torres@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Vanessa Barbosa', '91234567890', '1979-11-21', '21109876543', 'vanessa.barbosa@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Thiago Morais', '02345678901', '1983-08-07', '21098765432', 'thiago.morais@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Patricia Campos', '12345678902', '1990-04-14', '31987654321', 'patricia.campos@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Rodrigo Araujo', '22345678901', '1985-12-01', '31876543210', 'rodrigo.araujo@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Cristina Pinto', '32345678901', '1976-06-19', '31765432109', 'cristina.pinto@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Marcelo Castro', '42345678901', '1997-02-26', '31654321098', 'marcelo.castro@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Tatiane Freitas', '52345678901', '1981-09-13', '31543210987', 'tatiane.freitas@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Felipe Moreira', '62345678901', '1998-01-08', '31432109876', NULL);
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Monica Correia', '72345678901', '1974-10-25', '31321098765', 'monica.correia@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Vinicius Azevedo', '82345678901', '1987-07-12', '31210987654', 'vinicius.azevedo@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Sandra Vieira', '92345678901', '1992-03-30', '31109876543', NULL);
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Eduardo Lopes', '03456789012', '1989-11-17', '31098765432', 'eduardo.lopes@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Carla Ramos', '13456789012', '1984-05-24', '41987654321', 'carla.ramos@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Andre Cunha', '23456789013', '1995-01-11', '41876543210', 'andre.cunha@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Priscila Macedo', '33456789012', '1978-08-28', '41765432109', 'priscila.macedo@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Fabio Teixeira', '43456789012', '1993-12-15', '41654321098', NULL);
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Daniela Nogueira', '53456789012', '1980-04-02', '41543210987', 'daniela.nogueira@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Henrique Bastos', '63456789012', '1986-09-20', '41432109876', 'henrique.bastos@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Simone Guedes', '73456789012', '1991-06-07', '41321098765', 'simone.guedes@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Gustavo Franco', '83456789012', '1977-02-23', '41210987654', NULL);
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Claudia Batista', '93456789012', '1999-10-10', '41109876543', 'claudia.batista@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Leonardo Silva', '04567890123', '1985-07-27', '41098765432', 'leonardo.silva@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Renata Nascimento', '14567890123', '1982-03-14', '51987654321', 'renata.nascimento@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Alexandre Reis', '24567890123', '1996-11-01', '51876543210', NULL);
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Larissa Melo', '34567890124', '1973-05-18', '51765432109', 'larissa.melo@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Roberto Fonseca', '44567890123', '1988-01-25', '51654321098', 'roberto.fonseca@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Isabel Andrade', '54567890123', '1994-08-12', '51543210987', 'isabel.andrade@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Sergio Monteiro', '64567890123', '1979-12-29', '51432109876', NULL);
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Elaine Cavalcanti', '74567890123', '1987-04-16', '51321098765', 'elaine.cavalcanti@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Marcio Duarte', '84567890123', '1975-09-03', '51210987654', 'marcio.duarte@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Vera Xavier', '94567890123', '1992-06-20', '51109876543', 'vera.xavier@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Paulo Machado', '05678901234', '1983-02-07', '51098765432', NULL);
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Adriana Siqueira', '15678901234', '1990-10-24', '61987654321', 'adriana.siqueira@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Daniel Coelho', '25678901234', '1986-07-11', '61876543210', 'daniel.coelho@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Silvia Borges', '35678901234', '1978-03-28', '61765432109', NULL);
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Guilherme Santana', '45678901235', '1995-11-15', '61654321098', 'guilherme.santana@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Mariana Paiva', '55678901234', '1981-05-02', '61543210987', 'mariana.paiva@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Hugo Resende', '65678901234', '1989-01-19', '61432109876', 'hugo.resende@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Bianca Pereira', '75678901234', '1974-08-06', '61321098765', NULL);
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Leandro Farias', '85678901234', '1997-12-23', '61210987654', 'leandro.farias@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Luciana Vasconcelos', '95678901234', '1984-04-10', '61109876543', 'luciana.vasconcelos@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Mateus Tavares', '06789012345', '1993-09-27', '61098765432', 'mateus.tavares@email.com');
-INSERT INTO paciente (nome, cpf, dataNascimento, telefone, email)
-VALUES ('Sabrina Miranda', '16789012345', '1976-06-14', '71987654321', NULL);
-
--- =============================
--- CONSULTAS (110)
--- =============================
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-01-15', 'Realizada', 250.00, 'Consulta de rotina', 1, 1, 1, NULL, 1);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-01-16', 'Realizada', 0.00, 'Consulta coberta pelo convênio', 2, 2, NULL, 1, 2);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-01-17', 'Agendada', 180.00, NULL, 3, 3, 4, NULL, 3);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-01-18', 'Realizada', 0.00, 'Acompanhamento ginecológico', 4, 3, NULL, 2, 1);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-01-19', 'Cancelada', 300.00, 'Paciente não compareceu', 5, 4, 2, NULL, 4);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-01-20', 'Realizada', 220.00, 'Consulta ortopédica', 6, 5, 3, NULL, 5);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-01-22', 'Realizada', 0.00, 'Consulta pediátrica', 7, 6, NULL, 3, 6);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-01-23', 'Agendada', 280.00, NULL, 8, 7, 4, NULL, 7);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-01-24', 'Realizada', 240.00, 'Consulta urológica', 9, 8, 1, NULL, 8);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-01-25', 'Realizada', 0.00, 'Oftalmologia - exame de rotina', 10, 9, NULL, 4, 9);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-01-26', 'Retorno', 105.00, 'Retorno cardiologia', 1, 1, 2, NULL, 10);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-01-29', 'Realizada', 210.00, 'Otorrinolaringologia', 11, 10, 3, NULL, 1);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-01-30', 'Realizada', 0.00, 'Endocrinologia', 12, 11, NULL, 6, 2);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-01-31', 'Agendada', 150.00, NULL, 13, 12, 4, NULL, 3);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-01', 'Realizada', 270.00, 'Neurologia', 14, 14, 1, NULL, 4);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-02', 'Cancelada', 180.00, 'Reagendamento solicitado', 15, 15, 2, NULL, 5);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-05', 'Realizada', 0.00, 'Pediatria', 16, 6, NULL, 7, 6);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-06', 'Realizada', 250.00, 'Cardiologia', 17, 1, 3, NULL, 7);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-07', 'Agendada', 200.00, NULL, 18, 2, 4, NULL, 8);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-08', 'Realizada', 0.00, 'Ginecologia preventiva', 19, 3, NULL, 8, 9);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-09', 'Realizada', 300.00, 'Neurologia', 20, 4, 1, NULL, 10);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-12', 'Retorno', 110.00, 'Retorno ortopedia', 6, 5, 2, NULL, 1);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-13', 'Realizada', 0.00, 'Psiquiatria', 21, 7, NULL, 9, 2);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-14', 'Agendada', 240.00, NULL, 22, 8, 3, NULL, 3);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-15', 'Realizada', 190.00, 'Oftalmologia', 23, 9, 4, NULL, 4);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-16', 'Realizada', 0.00, 'Otorrinolaringologia', 24, 10, NULL, 10, 5);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-19', 'Cancelada', 200.00, 'Emergência familiar', 25, 11, 1, NULL, 6);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-20', 'Realizada', 150.00, 'Clínica geral', 26, 12, 2, NULL, 7);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-21', 'Agendada', 0.00, 'Consulta por convênio', 27, 14, NULL, 1, 8);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-22', 'Realizada', 180.00, 'Pediatria', 28, 15, 3, NULL, 9);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-23', 'Realizada', 250.00, 'Cardiologia check-up', 29, 1, 4, NULL, 10);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-26', 'Realizada', 0.00, 'Dermatologia', 30, 2, NULL, 2, 1);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-27', 'Retorno', 90.00, 'Retorno ginecologia', 3, 3, 1, NULL, 2);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-02-28', 'Agendada', 300.00, NULL, 31, 4, 2, NULL, 3);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-01', 'Realizada', 220.00, 'Ortopedia', 32, 5, 3, NULL, 4);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-04', 'Realizada', 0.00, 'Pediatria vacinação', 33, 6, NULL, 3, 5);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-05', 'Cancelada', 280.00, 'Paciente doente', 34, 7, 4, NULL, 6);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-06', 'Realizada', 240.00, 'Urologia', 35, 8, 1, NULL, 7);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-07', 'Agendada', 0.00, 'Oftalmologia convênio', 36, 9, NULL, 4, 8);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-08', 'Realizada', 210.00, 'Otorrinolaringologia', 37, 10, 2, NULL, 9);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-11', 'Realizada', 200.00, 'Endocrinologia diabetes', 38, 11, 3, NULL, 10);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-12', 'Realizada', 0.00, 'Clínica geral', 39, 12, NULL, 6, 1);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-13', 'Retorno', 135.00, 'Retorno neurologia', 14, 14, 4, NULL, 2);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-14', 'Agendada', 180.00, NULL, 40, 15, 1, NULL, 3);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-15', 'Realizada', 250.00, 'Cardiologia', 41, 1, 2, NULL, 4);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-18', 'Realizada', 0.00, 'Dermatologia', 42, 2, NULL, 7, 5);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-19', 'Cancelada', 180.00, 'Conflito de horário', 43, 3, 3, NULL, 6);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-20', 'Realizada', 300.00, 'Neurologia', 44, 4, 4, NULL, 7);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-21', 'Agendada', 0.00, 'Ortopedia convênio', 45, 5, NULL, 8, 8);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-22', 'Realizada', 160.00, 'Pediatria', 46, 6, 1, NULL, 9);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-25', 'Realizada', 280.00, 'Psiquiatria', 47, 7, 2, NULL, 10);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-26', 'Realizada', 0.00, 'Urologia', 48, 8, NULL, 9, 1);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-27', 'Retorno', 95.00, 'Retorno oftalmologia', 23, 9, 3, NULL, 2);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-28', 'Agendada', 210.00, NULL, 49, 10, 4, NULL, 3);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-03-29', 'Realizada', 0.00, 'Endocrinologia', 50, 11, NULL, 10, 4);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-01', 'Realizada', 150.00, 'Clínica geral', 51, 12, 1, NULL, 5);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-02', 'Cancelada', 270.00, 'Viagem imprevista', 52, 14, 2, NULL, 6);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-03', 'Realizada', 180.00, 'Pediatria', 53, 15, 3, NULL, 7);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-04', 'Agendada', 0.00, 'Cardiologia convênio', 54, 1, NULL, 1, 8);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-05', 'Realizada', 200.00, 'Dermatologia', 55, 2, 4, NULL, 9);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-08', 'Realizada', 180.00, 'Ginecologia', 56, 3, 1, NULL, 10);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-09', 'Realizada', 0.00, 'Neurologia', 57, 4, NULL, 2, 1);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-10', 'Retorno', 110.00, 'Retorno ortopedia', 32, 5, 2, NULL, 2);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-11', 'Agendada', 160.00, NULL, 58, 6, 3, NULL, 3);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-12', 'Realizada', 0.00, 'Psiquiatria', 59, 7, NULL, 3, 4);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-15', 'Realizada', 240.00, 'Urologia', 60, 8, 4, NULL, 5);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-16', 'Cancelada', 190.00, 'Paciente gripado', 1, 9, 1, NULL, 6);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-17', 'Realizada', 210.00, 'Otorrinolaringologia', 2, 10, 2, NULL, 7);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-18', 'Agendada', 0.00, 'Endocrinologia convênio', 3, 11, NULL, 4, 8);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-19', 'Realizada', 150.00, 'Clínica geral', 4, 12, 3, NULL, 9);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-22', 'Realizada', 270.00, 'Neurologia', 5, 14, 4, NULL, 10);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-23', 'Realizada', 0.00, 'Pediatria', 6, 15, NULL, 6, 1);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-24', 'Retorno', 125.00, 'Retorno cardiologia', 29, 1, 1, NULL, 2);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-25', 'Agendada', 200.00, NULL, 7, 2, 2, NULL, 3);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-26', 'Realizada', 0.00, 'Ginecologia', 8, 3, NULL, 7, 4);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-29', 'Cancelada', 300.00, 'Emergência médica', 9, 4, 3, NULL, 5);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-04-30', 'Realizada', 220.00, 'Ortopedia', 10, 5, 4, NULL, 6);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-01', 'Agendada', 0.00, 'Pediatria convênio', 11, 6, NULL, 8, 7);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-02', 'Realizada', 280.00, 'Psiquiatria', 12, 7, 1, NULL, 8);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-03', 'Realizada', 240.00, 'Urologia', 13, 8, 2, NULL, 9);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-06', 'Realizada', 0.00, 'Oftalmologia', 14, 9, NULL, 9, 10);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-07', 'Retorno', 105.00, 'Retorno otorrino', 37, 10, 3, NULL, 1);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-08', 'Agendada', 200.00, NULL, 15, 11, 4, NULL, 2);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-09', 'Realizada', 0.00, 'Clínica geral', 16, 12, NULL, 10, 3);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-10', 'Cancelada', 270.00, 'Paciente internado', 17, 14, 1, NULL, 4);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-13', 'Realizada', 180.00, 'Pediatria', 18, 15, 2, NULL, 5);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-14', 'Agendada', 0.00, 'Cardiologia convênio', 19, 1, NULL, 1, 6);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-15', 'Realizada', 200.00, 'Dermatologia', 20, 2, 3, NULL, 7);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-16', 'Realizada', 180.00, 'Ginecologia', 21, 3, 4, NULL, 8);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-17', 'Realizada', 0.00, 'Neurologia', 22, 4, NULL, 2, 9);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-20', 'Retorno', 110.00, 'Retorno ortopedia', 45, 5, 1, NULL, 10);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-21', 'Agendada', 160.00, NULL, 23, 6, 2, NULL, 1);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-22', 'Realizada', 0.00, 'Psiquiatria', 24, 7, NULL, 3, 2);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-23', 'Cancelada', 240.00, 'Chuva forte', 25, 8, 3, NULL, 3);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-24', 'Realizada', 190.00, 'Oftalmologia', 26, 9, 4, NULL, 4);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-27', 'Agendada', 0.00, 'Otorrinolaringologia convênio', 27, 10, NULL, 4, 5);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-28', 'Realizada', 200.00, 'Endocrinologia', 28, 11, 1, NULL, 6);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-29', 'Realizada', 150.00, 'Clínica geral check-up', 29, 12, 2, NULL, 7);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-30', 'Realizada', 0.00, 'Neurologia', 30, 14, NULL, 6, 8);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-05-31', 'Retorno', 90.00, 'Retorno pediatria', 53, 15, 3, NULL, 9);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-06-03', 'Agendada', 250.00, NULL, 31, 1, 4, NULL, 10);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-06-04', 'Realizada', 0.00, 'Dermatologia', 32, 2, NULL, 7, 1);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-06-05', 'Cancelada', 180.00, 'Trabalho urgente', 33, 3, 1, NULL, 2);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-06-06', 'Realizada', 300.00, 'Neurologia especializada', 34, 4, 2, NULL, 3);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-06-07', 'Agendada', 0.00, 'Ortopedia convênio', 35, 5, NULL, 8, 4);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-06-10', 'Realizada', 160.00, 'Pediatria vacinação', 36, 6, 3, NULL, 5);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-06-11', 'Realizada', 280.00, 'Psiquiatria acompanhamento', 37, 7, 4, NULL, 6);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-06-12', 'Realizada', 0.00, 'Urologia', 38, 8, NULL, 9, 7);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-06-13', 'Retorno', 95.00, 'Retorno oftalmologia', 26, 9, 1, NULL, 8);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-06-14', 'Agendada', 210.00, NULL, 39, 10, 2, NULL, 9);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-06-17', 'Realizada', 0.00, 'Endocrinologia diabetes', 40, 11, NULL, 10, 10);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-06-18', 'Cancelada', 150.00, 'Férias antecipadas', 41, 12, 3, NULL, 1);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-06-19', 'Realizada', 270.00, 'Neurologia', 42, 14, 4, NULL, 2);
-INSERT INTO consulta (dataHoraConsulta, status, valor, observacoes, pacienteID, medicoID, formaPagamentoID, convenioID,
-                      recepcionistaID)
-VALUES ('2024-06-20', 'Agendada', 0.00, 'Pediatria convênio', 43, 15, NULL, 1, 3);
+-- =====================================================================================================================
+-- CONVENIO (10)
+-- =====================================================================================================================
+INSERT INTO CONVENIO (ATIVO, TELEFONE, CNPJ, EMAIL, NOME)
+VALUES (TRUE, '11987654321', '12345678000195', 'contato@unimed.com.br', 'Unimed'),
+       (TRUE, '11876543210', '23456789000186', 'atendimento@bradescosaude.com.br', 'Bradesco Saúde'),
+       (TRUE, '11765432109', '34567890000177', 'sac@sulamerica.com.br', 'SulAmérica Saúde'),
+       (TRUE, '11654321098', '45678901000168', 'central@amil.com.br', 'Amil'),
+       (TRUE, '11432109876', '67890123000140', 'atendimento@hapvida.com.br', 'Hapvida'),
+       (TRUE, '11321098765', '78901234000131', 'sac@goldencross.com.br', 'Golden Cross'),
+       (TRUE, '11109876543', '90123456000113', 'relacionamento@saocristovao.com.br', 'São Cristóvão Saúde'),
+       (TRUE, '11098765432', '01234567000104', 'ouvidoria@cassi.com.br', 'Cassi'),
+       (FALSE, '11543210987', '56789012000159', 'relacionamento@gndi.com.br', 'NotreDame Intermédica'),
+       (FALSE, '11210987654', '89012345000122', 'central@preventsenior.com.br', 'Prevent Senior');
+-- =====================================================================================================================
+-- ESPECIALIDADE (12)
+-- =====================================================================================================================
+INSERT INTO ESPECIALIDADE (NOME, DESCRICAO)
+VALUES ('Cardiologia',
+        'Diagnóstico e tratamento das doenças que acometem o coração'),
+       ('Dermatologia',
+        'Diagnóstico, tratamento e prevenção de doenças da pele'),
+       ('Ginecologia',
+        'Trata da saúde do aparelho reprodutor feminino'),
+       ('Neurologia',
+        'Trata dos distúrbios estruturais do sistema nervoso'),
+       ('Ortopedia',
+        'Cuida do aparelho locomotor: ossos, músculos, ligamentos e articulações'),
+       ('Pediatria',
+        'Especialidade médica dedicada à assistência à criança e ao adolescente'),
+       ('Psiquiatria',
+        'Especialidade médica que lida com a prevenção, diagnóstico e tratamento de transtornos mentais'),
+       ('Urologia',
+        'Trata do trato urinário de homens e mulheres e do sistema reprodutor masculino'),
+       ('Oftalmologia',
+        'Investiga e trata as doenças relacionadas aos olhos'),
+       ('Otorrinolaringologia',
+        'Cuida dos ouvidos, nariz, seios paranasais, faringe e laringe'),
+       ('Endocrinologia',
+        'Cuida dos transtornos das glândulas endócrinas'),
+       ('Clínica Geral',
+        'Proporciona atenção contínua');
+-- =====================================================================================================================
+-- FORMA_PAGAMENTO (5)
+-- =====================================================================================================================
+INSERT INTO FORMA_PAGAMENTO (DESCRICAO)
+VALUES ('Dinheiro'),
+       ('Débito'),
+       ('Crédito'),
+       ('PIX'),
+       ('Convênio Médico');
+-- =====================================================================================================================
+-- MEDICO (15)
+-- =====================================================================================================================
+INSERT INTO MEDICO (NOME, ATIVO, VALORCONSULTAREFERENCIA, CRM, TELEFONE, EMAIL, ESPECIALIDADEID)
+VALUES ('Dra. Beatriz Nunes', TRUE, 250.00, '12345-SP', '11987654321', 'carlos.silva@email.com', 1),
+       ('Dr. Carlos Silva', TRUE, 200.00, '23456-RJ', '21876543210', 'ana.santos@email.com', 2),
+       ('Dra. Ana Santos', TRUE, 180.00, '34567-MG', '31765432109', 'maria.oliveira@email.com', 3),
+       ('Dra. Maria Oliveira', TRUE, 300.00, '45678-RS', '51654321098', 'joao.pereira@email.com', 4),
+       ('Dr. João Pereira', TRUE, 220.00, '56789-PR', '41543210987', 'pedro.costa@email.com', 5),
+       ('Dr. Pedro Costa', TRUE, 160.00, '67890-SC', '47432109876', 'julia.lima@email.com', 6),
+       ('Dra. Julia Lima', TRUE, 280.00, '78901-BA', '71321098765', 'rafael.souza@email.com', 7),
+       ('Dr. Rafael Souza', TRUE, 240.00, '89012-PE', '81210987654', 'lucas.alves@email.com', 8),
+       ('Dr. Lucas Alves', TRUE, 190.00, '90123-GO', '62109876543', 'fernanda.rocha@email.com', 9),
+       ('Dra. Fernanda Rocha', TRUE, 210.00, '1234-DF', '61098765432', 'ricardo.dias@email.com', 10),
+       ('Dr. Ricardo Dias', TRUE, 200.00, '111111-CE', '85987654321', 'camila.martins@email.com', 11),
+       ('Dra. Camila Martins', TRUE, 150.00, '222222-ES', '27876543210', 'bruno.ferreira@email.com', 12),
+       ('Dr. Bruno Ferreira', FALSE, 220.00, '333333-SP', '11765432100', 'leticia.gomes@email.com', 1),
+       ('Dra. Leticia Gomes', TRUE, 270.00, '4444-RJ', '21654321000', 'gabriel.ribeiro@email.com', 4),
+       ('Dr. Gabriel Ribeiro', TRUE, 180.00, '55555-MG', '31543210000', 'beatriz.nunes@email.com', 6);
+-- =====================================================================================================================
+-- PACIENTE (63)
+-- =====================================================================================================================
+INSERT INTO PACIENTE (ID, NOME, CPF, DATANASCIMENTO, TELEFONE, EMAIL)
+VALUES (1, 'Ana Silva', '12345678901', '1985-03-15', '11987654321', 'ana.silva@email.com'),
+       (2, 'Carlos Santos', '23456789012', '1990-07-22', '11876543210', 'carlos.santos@email.com'),
+       (3, 'Maria Oliveira', '34567890123', '1978-11-08', '11765432109', 'maria.oliveira@email.com'),
+       (4, 'João Pereira', '45678901234', '1995-01-30', '11654321098', 'joao.pereira@email.com'),
+       (5, 'Fernanda Costa', '56789012345', '1987-09-12', '11543210987', 'fernanda.costa@email.com'),
+       (6, 'Ricardo Lima', '67890123456', '1992-05-25', '11432109876', 'ricardo.lima@email.com'),
+       (7, 'Juliana Souza', '78901234567', '1980-12-03', '11321098765', 'juliana.souza@email.com'),
+       (8, 'Pedro Alves', '89012345678', '1975-04-17', '11210987654', 'pedro.alves@email.com'),
+       (9, 'Camila Rocha', '90123456789', '1993-08-14', '11109876543', 'camila.rocha@email.com'),
+       (10, 'Lucas Dias', '01234567890', '1988-06-28', '11098765432', 'lucas.dias@email.com'),
+       (11, 'Amanda Ferreira', '11234567890', '1991-02-10', '21987654321', 'amanda.ferreira@email.com'),
+       (12, 'Bruno Gomes', '21234567890', '1984-09-18', '21876543210', 'bruno.gomes@email.com'),
+       (13, 'Leticia Martins', '31234567890', '1996-12-05', '21765432109', 'leticia.martins@email.com'),
+       (14, 'Rafael Ribeiro', '41234567890', '1982-03-22', '21654321098', 'rafael.ribeiro@email.com'),
+       (15, 'Beatriz Nunes', '51234567890', '1989-10-11', '21543210987', 'beatriz.nunes@email.com'),
+       (16, 'Gabriel Cardoso', '61234567890', '1977-07-29', '21432109876', 'gabriel.cardoso@email.com'),
+       (17, 'Roberta Mendes', '71234567890', '1994-01-16', '21321098765', 'roberta.mendes@email.com'),
+       (18, 'Diego Torres', '81234567890', '1986-05-04', '21210987654', 'diego.torres@email.com'),
+       (19, 'Vanessa Barbosa', '91234567890', '1979-11-21', '21109876543', 'vanessa.barbosa@email.com'),
+       (20, 'Thiago Morais', '02345678901', '1983-08-07', '21098765432', 'thiago.morais@email.com'),
+       (21, 'Patricia Campos', '12345678902', '1990-04-14', '31987654321', 'patricia.campos@email.com'),
+       (22, 'Rodrigo Araujo', '22345678901', '1985-12-01', '31876543210', 'rodrigo.araujo@email.com'),
+       (23, 'Cristina Pinto', '32345678901', '1976-06-19', '31765432109', 'cristina.pinto@email.com'),
+       (24, 'Marcelo Castro', '42345678901', '1997-02-26', '31654321098', 'marcelo.castro@email.com'),
+       (25, 'Tatiane Freitas', '52345678901', '1981-09-13', '31543210987', 'tatiane.freitas@email.com'),
+       (26, 'Felipe Moreira', '62345678901', '1998-01-08', '31432109876', NULL),
+       (27, 'Monica Correia', '72345678901', '1974-10-25', '31321098765', 'monica.correia@email.com'),
+       (28, 'Vinicius Azevedo', '82345678901', '1987-07-12', '31210987654', 'vinicius.azevedo@email.com'),
+       (29, 'Sandra Vieira', '92345678901', '1992-03-30', '31109876543', NULL),
+       (30, 'Eduardo Lopes', '03456789012', '1989-11-17', '31098765432', 'eduardo.lopes@email.com'),
+       (31, 'Carla Ramos', '13456789012', '1984-05-24', '41987654321', 'carla.ramos@email.com'),
+       (32, 'Andre Cunha', '23456789013', '1995-01-11', '41876543210', 'andre.cunha@email.com'),
+       (33, 'Priscila Macedo', '33456789012', '1978-08-28', '41765432109', 'priscila.macedo@email.com'),
+       (34, 'Fabio Teixeira', '43456789012', '1993-12-15', '41654321098', NULL),
+       (35, 'Daniela Nogueira', '53456789012', '1980-04-02', '41543210987', 'daniela.nogueira@email.com'),
+       (36, 'Henrique Bastos', '63456789012', '1986-09-20', '41432109876', 'henrique.bastos@email.com'),
+       (37, 'Simone Guedes', '73456789012', '1991-06-07', '41321098765', 'simone.guedes@email.com'),
+       (38, 'Gustavo Franco', '83456789012', '1977-02-23', '41210987654', NULL),
+       (39, 'Claudia Batista', '93456789012', '1999-10-10', '41109876543', 'claudia.batista@email.com'),
+       (40, 'Leonardo Silva', '04567890123', '1985-07-27', '41098765432', 'leonardo.silva@email.com'),
+       (41, 'Renata Nascimento', '14567890123', '1982-03-14', '51987654321', 'renata.nascimento@email.com'),
+       (42, 'Alexandre Reis', '24567890123', '1996-11-01', '51876543210', NULL),
+       (43, 'Larissa Melo', '34567890124', '1973-05-18', '51765432109', 'larissa.melo@email.com'),
+       (44, 'Roberto Fonseca', '44567890123', '1988-01-25', '51654321098', 'roberto.fonseca@email.com'),
+       (45, 'Isabel Andrade', '54567890123', '1994-08-12', '51543210987', 'isabel.andrade@email.com'),
+       (46, 'Sergio Monteiro', '64567890123', '1979-12-29', '51432109876', NULL),
+       (47, 'Elaine Cavalcanti', '74567890123', '1987-04-16', '51321098765', 'elaine.cavalcanti@email.com'),
+       (48, 'Marcio Duarte', '84567890123', '1975-09-03', '51210987654', 'marcio.duarte@email.com'),
+       (49, 'Vera Xavier', '94567890123', '1992-06-20', '51109876543', 'vera.xavier@email.com'),
+       (50, 'Paulo Machado', '05678901234', '1983-02-07', '51098765432', NULL),
+       (51, 'Adriana Siqueira', '15678901234', '1990-10-24', '61987654321', 'adriana.siqueira@email.com'),
+       (52, 'Daniel Coelho', '25678901234', '1986-07-11', '61876543210', 'daniel.coelho@email.com'),
+       (53, 'Silvia Borges', '35678901234', '1978-03-28', '61765432109', NULL),
+       (54, 'Guilherme Santana', '45678901235', '1995-11-15', '61654321098', 'guilherme.santana@email.com'),
+       (55, 'Mariana Paiva', '55678901234', '1981-05-02', '61543210987', 'mariana.paiva@email.com'),
+       (56, 'Hugo Resende', '65678901234', '1989-01-19', '61432109876', 'hugo.resende@email.com'),
+       (57, 'Bianca Pereira', '75678901234', '1974-08-06', '61321098765', NULL),
+       (58, 'Leandro Farias', '85678901234', '1997-12-23', '61210987654', 'leandro.farias@email.com'),
+       (59, 'Luciana Vasconcelos', '95678901234', '1984-04-10', '61109876543', 'luciana.vasconcelos@email.com'),
+       (60, 'Mateus Tavares', '06789012345', '1993-09-27', '61098765432', 'mateus.tavares@email.com'),
+       (61, 'Sabrina Miranda', '16789012345', '1976-06-14', '71987654321', NULL),
+       (62, 'Sabrina Miranda Filho', '12709012345', '2006-06-14', '71987654321', NULL),
+       (63, 'Sabrina Miranda Junior', '14780012345', '2024-06-14', '71987654321', NULL);
+-- =====================================================================================================================
+-- RECEPCIONISTA (10)
+-- =====================================================================================================================
+INSERT INTO RECEPCIONISTA (ID, ATIVO, DATAADMISSAO, DATADEMISSAO, DATANASCIMENTO, CPF, TELEFONE, EMAIL, NOME)
+VALUES (1, TRUE, '2022-01-10', NULL, '1995-03-15', '12345678901', '11987654321',
+        'amanda.silva@smartmed.com.br', 'Amanda Silva'),
+       (2, TRUE, '2021-05-20', NULL, '1988-07-22', '23456789012', '11876543210',
+        'carla.santos@smartmed.com.br', 'Carla Santos'),
+       (3, TRUE, '2023-02-14', NULL, '1992-11-08', '34567890123', '11765432109',
+        'fernanda.costa@smartmed.com.br', 'Fernanda Costa'),
+       (4, FALSE, '2020-08-05', '2025-06-15', '1990-01-30', '45678901234', '11654321098',
+        'juliana.oliveira@smartmed.com.br', 'Juliana Oliveira'),
+       (5, TRUE, '2022-03-18', NULL, '1987-09-12', '56789012345', '11543210987',
+        'patricia.lima@smartmed.com.br', 'Patrícia Lima'),
+       (6, TRUE, '2023-07-01', NULL, '1994-05-25', '67890123456', '11432109876',
+        'roberta.souza@smartmed.com.br', 'Roberta Souza'),
+       (7, FALSE, '2021-11-22', '2025-01-10', '1991-12-03', '78901234567', '11321098765',
+        'vanessa.pereira@smartmed.com.br', 'Vanessa Pereira'),
+       (8, TRUE, '2022-09-30', NULL, '1989-04-17', '89012345678', '11210987654',
+        'tatiane.alves@smartmed.com.br', 'Tatiane Alves'),
+       (9, TRUE, '2023-04-12', NULL, '1993-08-14', '90123456789', '11109876543',
+        'cristina.rocha@smartmed.com.br', 'Cristina Rocha'),
+       (10, TRUE, '2020-12-07', NULL, '1986-06-28', '01234567890', '11098765432',
+        'monica.dias@smartmed.com.br', 'Mônica Dias');
+-- =====================================================================================================================
+-- CONSULTAS (120)
+-- =====================================================================================================================
+INSERT INTO CONSULTA (DATAHORACONSULTA, STATUS, VALOR, OBSERVACOES, PACIENTEID, MEDICOID, FORMAPAGAMENTOID, CONVENIOID,
+                      RECEPCIONISTAID)
+VALUES ('2025-01-04', 'Realizada', 350.05, NULL, 49, 11, 1, NULL, 7),
+       ('2025-01-07', 'Realizada', 255.20, NULL, 13, 14, 5, 7, 6),
+       ('2025-01-10', 'Retorno', 155.50, NULL, 16, 6, 5, 6, 8),
+       ('2025-01-13', 'Cancelada', 255.00, NULL, 17, 8, 3, NULL, 2),
+       ('2025-01-16', 'Realizada', 255.00, NULL, 25, 7, 5, 9, 9),
+       ('2025-01-19', 'Realizada', 255.00, NULL, 1, 15, 2, NULL, 8),
+       ('2025-01-22', 'Realizada', 250.00, NULL, 60, 9, 1, NULL, 3),
+       ('2025-01-25', 'Realizada', 250.00, NULL, 6, 2, 5, 1, 4),
+       ('2025-01-28', 'Agendada', 0.00, 'Consulta gratuita', 54, 5, NULL, NULL, 10),
+       ('2025-01-31', 'Retorno', 250.00, NULL, 2, 13, 2, NULL, 1),
+       ('2025-02-04', 'Realizada', 355.00, NULL, 40, 4, 1, NULL, 2),
+       ('2025-02-07', 'Realizada', 255.00, NULL, 5, 3, 4, NULL, 6),
+       ('2025-02-10', 'Cancelada', 255.00, NULL, 26, 1, 1, NULL, 9),
+       ('2025-02-13', 'Realizada', 255.00, NULL, 30, 10, 3, NULL, 5),
+       ('2025-02-16', 'Realizada', 255.00, NULL, 8, 11, 1, NULL, 7),
+       ('2025-02-19', 'Retorno', 250.00, NULL, 29, 12, 5, 2, 4),
+       ('2025-02-22', 'Realizada', 250.00, NULL, 12, 1, 3, NULL, 3),
+       ('2025-02-25', 'Realizada', 250.00, NULL, 36, 5, 4, NULL, 6),
+       ('2025-02-28', 'Agendada', 0.00, 'Consulta gratuita', 61, 14, NULL, NULL, 2),
+       ('2025-03-03', 'Realizada', 255.00, NULL, 11, 3, 2, NULL, 1),
+       ('2025-03-06', 'Realizada', 255.00, NULL, 21, 7, 5, 3, 10),
+       ('2025-03-09', 'Cancelada', 255.00, NULL, 19, 9, 2, NULL, 5),
+       ('2025-03-12', 'Realizada', 255.00, NULL, 9, 2, 1, NULL, 8),
+       ('2025-03-15', 'Realizada', 250.00, NULL, 41, 4, 3, NULL, 4),
+       ('2025-03-18', 'Retorno', 150.00, NULL, 24, 8, 1, NULL, 6),
+       ('2025-03-21', 'Realizada', 250.00, NULL, 35, 6, 5, 7, 3),
+       ('2025-03-24', 'Realizada', 250.00, NULL, 28, 13, 2, NULL, 9),
+       ('2025-03-27', 'Agendada', 0.00, 'Consulta gratuita', 34, 15, NULL, NULL, 10),
+       ('2025-03-30', 'Realizada', 255.00, NULL, 14, 11, 4, NULL, 2),
+       ('2025-04-02', 'Realizada', 255.00, NULL, 48, 1, 1, NULL, 7),
+       ('2025-04-05', 'Realizada', 255.00, NULL, 44, 10, 3, NULL, 1),
+       ('2025-04-08', 'Cancelada', 255.00, NULL, 32, 9, 2, NULL, 4),
+       ('2025-04-11', 'Realizada', 255.00, NULL, 3, 5, 5, 4, 6),
+       ('2025-04-14', 'Realizada', 250.00, NULL, 37, 2, 4, NULL, 9),
+       ('2025-04-17', 'Retorno', 250.00, NULL, 23, 12, 1, NULL, 8),
+       ('2025-04-20', 'Realizada', 50.00, NULL, 7, 14, 3, NULL, 5),
+       ('2025-04-23', 'Realizada', 250.00, NULL, 20, 8, 1, NULL, 2),
+       ('2025-04-26', 'Agendada', 0.00, 'Consulta gratuita', 33, 7, NULL, NULL, 3),
+       ('2025-04-29', 'Realizada', 455.00, NULL, 10, 3, 2, NULL, 6),
+       ('2025-05-02', 'Realizada', 255.00, NULL, 27, 4, 5, 1, 4),
+       ('2025-05-05', 'Realizada', 255.00, NULL, 39, 11, 3, NULL, 9),
+       ('2025-05-08', 'Cancelada', 255.00, NULL, 31, 6, 2, NULL, 1),
+       ('2025-05-11', 'Realizada', 255.00, NULL, 22, 9, 1, NULL, 10),
+       ('2025-05-14', 'Realizada', 250.00, NULL, 50, 5, 4, NULL, 2),
+       ('2025-05-17', 'Retorno', 250.00, NULL, 15, 1, 3, NULL, 3),
+       ('2025-05-20', 'Realizada', 250.00, NULL, 43, 13, 1, NULL, 7),
+       ('2025-05-23', 'Realizada', 250.00, NULL, 18, 2, 5, 6, 8),
+       ('2025-05-26', 'Agendada', 0.00, 'Consulta gratuita', 52, 10, NULL, NULL, 5),
+       ('2025-05-29', 'Realizada', 255.00, NULL, 56, 14, 2, NULL, 1),
+       ('2025-06-01', 'Realizada', 255.00, NULL, 38, 8, 4, NULL, 6),
+       ('2025-06-04', 'Realizada', 255.00, NULL, 45, 12, 1, NULL, 9),
+       ('2025-06-07', 'Cancelada', 255.00, NULL, 47, 15, 2, NULL, 4),
+       ('2025-06-10', 'Realizada', 255.00, NULL, 42, 11, 3, NULL, 2),
+       ('2025-06-13', 'Realizada', 550.00, NULL, 51, 1, 5, 10, 3),
+       ('2025-06-16', 'Retorno', 250.00, NULL, 46, 7, 1, NULL, 7),
+       ('2025-06-19', 'Realizada', 250.00, NULL, 53, 4, 4, NULL, 10),
+       ('2025-06-22', 'Realizada', 250.00, NULL, 55, 9, 2, NULL, 5),
+       ('2025-06-25', 'Agendada', 0.00, 'Consulta gratuita', 59, 6, NULL, NULL, 8),
+       ('2025-06-28', 'Realizada', 255.00, NULL, 57, 3, 3, NULL, 1),
+-- note: previous line intentionally keeps same column order; fix spelling if needed: recepcionistaID
+       ('2025-07-01', 'Realizada', 155.00, NULL, 4, 5, 1, NULL, 6),
+       ('2025-07-04', 'Realizada', 255.00, NULL, 33, 2, 5, 1, 3),
+       ('2025-07-07', 'Cancelada', 255.00, NULL, 17, 14, 4, NULL, 9),
+       ('2025-07-10', 'Realizada', 255.00, NULL, 2, 8, 3, NULL, 2),
+       ('2025-07-13', 'Retorno', 250.00, NULL, 11, 1, 1, NULL, 4),
+       ('2025-07-16', 'Realizada', 250.00, NULL, 6, 10, 2, NULL, 8),
+       ('2025-07-19', 'Realizada', 250.00, NULL, 49, 12, 1, NULL, 7),
+       ('2025-07-22', 'Agendada', 0.00, 'Consulta gratuita', 60, 13, NULL, NULL, 10),
+       ('2025-07-25', 'Realizada', 55.00, NULL, 15, 11, 3, NULL, 1),
+       ('2025-07-28', 'Realizada', 255.00, NULL, 26, 7, 4, NULL, 2),
+       ('2025-08-01', 'Realizada', 255.00, NULL, 38, 9, 1, NULL, 3),
+       ('2025-08-04', 'Realizada', 255.00, NULL, 47, 4, 5, 6, 5),
+       ('2025-08-07', 'Cancelada', 105.00, NULL, 29, 2, 2, NULL, 9),
+       ('2025-08-10', 'Realizada', 155.00, NULL, 1, 6, 3, NULL, 6),
+       ('2025-08-13', 'Retorno', 250.00, NULL, 21, 14, 1, NULL, 4),
+       ('2025-08-16', 'Realizada', 250.00, NULL, 36, 8, 4, NULL, 8),
+       ('2025-08-19', 'Realizada', 250.00, NULL, 30, 1, 2, NULL, 7),
+       ('2025-08-22', 'Agendada', 0.00, 'Consulta gratuita', 53, 5, NULL, NULL, 10),
+       ('2025-08-25', 'Realizada', 255.00, NULL, 24, 3, 3, NULL, 1),
+       ('2025-08-28', 'Realizada', 155.00, NULL, 19, 12, 1, NULL, 2),
+       ('2025-09-01', 'Agendada', 255.00, NULL, 14, 11, 4, NULL, 3),
+       ('2025-09-04', 'Agendada', 255.00, NULL, 40, 2, 2, NULL, 6),
+       ('2025-09-07', 'Agendada', 255.00, NULL, 57, 7, 3, NULL, 5),
+       ('2025-09-10', 'Cancelada', 255.00, NULL, 8, 14, 1, NULL, 9),
+       ('2025-09-13', 'Agendada', 250.00, NULL, 35, 4, 5, 6, 1),
+       ('2025-09-16', 'Retorno', 250.00, NULL, 42, 10, 2, NULL, 4),
+       ('2025-09-19', 'Agendada', 350.00, NULL, 12, 1, 1, NULL, 8),
+       ('2025-09-22', 'Agendada', 0.00, 'Consulta gratuita', 32, 9, NULL, NULL, 7),
+       ('2025-09-25', 'Agendada', 255.00, NULL, 27, 3, 3, NULL, 2),
+       ('2025-09-28', 'Agendada', 255.00, NULL, 46, 13, 4, NULL, 6),
+       ('2025-10-01', 'Agendada', 255.00, NULL, 23, 5, 2, NULL, 5),
+       ('2025-10-04', 'Agendada', 255.00, NULL, 58, 7, 1, NULL, 9),
+       ('2025-10-07', 'Agendada', 255.00, NULL, 37, 11, 5, 3, 4),
+       ('2025-10-10', 'Cancelada', 255.00, NULL, 54, 8, 2, NULL, 1),
+       ('2025-10-13', 'Agendada', 250.00, NULL, 60, 4, 3, NULL, 2),
+       ('2025-10-16', 'Retorno', 350.00, NULL, 44, 12, 1, NULL, 6),
+       ('2025-10-19', 'Agendada', 250.00, NULL, 16, 2, 4, NULL, 3),
+       ('2025-10-22', 'Agendada', 0.00, 'Consulta gratuita', 55, 15, NULL, NULL, 7),
+       ('2025-10-25', 'Agendada', 255.00, NULL, 20, 9, 3, NULL, 8),
+       ('2025-10-28', 'Agendada', 255.00, NULL, 34, 1, 1, NULL, 10),
+       ('2025-11-01', 'Agendada', 255.00, NULL, 36, 4, 2, NULL, 2),
+       ('2025-11-04', 'Agendada', 255.00, NULL, 41, 10, 5, 9, 5),
+       ('2025-11-07', 'Agendada', 255.00, NULL, 49, 6, 3, NULL, 1),
+       ('2025-11-10', 'Cancelada', 255.00, NULL, 3, 14, 4, NULL, 6),
+       ('2025-11-13', 'Agendada', 250.00, NULL, 28, 8, 2, NULL, 9),
+       ('2025-11-16', 'Retorno', 250.00, NULL, 11, 11, 1, NULL, 3),
+       ('2025-11-19', 'Agendada', 400.00, NULL, 26, 5, 4, NULL, 4),
+       ('2025-11-22', 'Agendada', 0.00, 'Consulta gratuita', 38, 13, NULL, NULL, 8),
+       ('2025-11-25', 'Agendada', 255.00, NULL, 17, 9, 3, NULL, 2),
+       ('2025-11-28', 'Agendada', 255.00, NULL, 21, 1, 5, 6, 10),
+       ('2025-12-01', 'Agendada', 255.00, NULL, 56, 12, 2, NULL, 3),
+       ('2025-12-04', 'Agendada', 255.00, NULL, 7, 4, 4, NULL, 1),
+       ('2025-12-07', 'Agendada', 405.00, NULL, 47, 2, 3, NULL, 9),
+       ('2025-12-10', 'Cancelada', 105.00, NULL, 13, 8, 1, NULL, 6),
+       ('2025-12-13', 'Agendada', 250.00, NULL, 31, 14, 5, 10, 2),
+       ('2025-12-16', 'Retorno', 250.00, NULL, 5, 3, 2, NULL, 4),
+       ('2025-12-19', 'Agendada', 250.00, NULL, 45, 11, 1, NULL, 7),
+       ('2025-12-22', 'Agendada', 0.00, 'Consulta gratuita', 51, 6, NULL, NULL, 8),
+       ('2025-12-25', 'Agendada', 255.00, NULL, 2, 9, 3, NULL, 5),
+       ('2025-12-28', 'Agendada', 255.00, NULL, 18, 5, 4, NULL, 10);
